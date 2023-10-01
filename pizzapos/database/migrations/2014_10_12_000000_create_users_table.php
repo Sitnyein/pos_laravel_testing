@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('image')->nullable();
             $table->string('phone',15);
-            $table->string('role',15);
+            $table->string('role',15)->default('user');
             $tbale->string('address');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -36,3 +36,17 @@ return new class extends Migration
         Schema::dropIfExists('users');
     }
 };
+$table->id();
+$table->string('name');
+$table->string('email')->unique();
+$table->string('image')->nullable();
+$table->string('phone',15);
+$table->string('gender',10);
+$table->string('address');
+$table->string('role',15)->default('user');
+$table->timestamp('email_verified_at')->nullable();
+$table->string('password');
+$table->rememberToken();
+$table->foreignId('current_team_id')->nullable();
+$table->string('profile_photo_path', 2048)->nullable();
+$table->timestamps();
