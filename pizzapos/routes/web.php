@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,23 +18,23 @@ use Illuminate\Support\Facades\Route;
 //     return redirect()->route('register');
 // });
 
-// Route::middleware([
-//     'auth:sanctum',
-//     config('jetstream.auth_session'),
-//     'verified'
-// ])->group(function () {
-//     Route::get('/dashboard', function () {
-//         return view('dashboard');
-//     })->name('dashboard');
-//     Route::get('/testing',function() {
-//         echo "this is testing nw";
-//     });
-// });
-
-Route::get('/',function() {
-    return view('login');
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+    Route::get('/testing',function() {
+        echo "this is testing nw";
+    });
 });
 
-Route::get('register',function() {
-    return view('register');
+//
+Route::get('/',function () {
+    return redirect()->route('auth#loginPage');
 });
+Route::get('loginPage',[AuthController::class,'loginPage'])->name('auth#loginPage');
+Route::get('registerPage',[AuthController::class,'registerPage'])->name('auth#registerPage');
+
