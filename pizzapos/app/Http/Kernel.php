@@ -2,7 +2,9 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\Adminauth;
 use App\Http\Middleware\blog;
+use App\Http\Middleware\Userauth;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -64,6 +66,8 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'blog_middleware' => blog::class
+        'blog_middleware' => blog::class,
+        'admin_auth' => Adminauth::class,
+        'user_auth' => Userauth::class,
     ];
 }
