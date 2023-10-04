@@ -1,0 +1,10 @@
+@extends('admin.template.master')
+@section('content')
+<h1>hello world</h1>
+<form action="{{route('logout')}}" method="post" class="text-start">
+    @csrf
+    <button class="btn btn-primary text-white">logout</button>
+  </form></body>
+
+@endsection
+$categories

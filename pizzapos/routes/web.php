@@ -27,6 +27,11 @@ Route::middleware([
     Route::group(['prefix' => 'category', 'middleware' => "admin_auth"], function () {
 
         Route::get('list', [CategoryController::class, 'categorylist'])->name('category#list');
+        Route::get('createpage',[CategoryController::class,'categorycreatepage'])->name('category#createpage');
+        Route::post('create',[CategoryController::class,'categorycreate'])->name('category#create');
+
+        Route::get('delete/{id}',[CategoryController::class,'categorydelete'])->name('category#delete');
+
     });
 
 //user
@@ -50,4 +55,7 @@ Route::view('URI', 'viewName');
 
 Route::get('template',function() {
     return view('admin.template.template');
+});
+Route::get('test/category',function() {
+    return view('admin.category.create');
 });

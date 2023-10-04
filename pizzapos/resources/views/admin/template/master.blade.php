@@ -75,7 +75,7 @@
                 </div>
             </aside>
             <!-- END MENU SIDEBAR-->
-          {{-- Page-container  --}}
+          {{-- PAGE-CONTAINER  --}}
           <div class="page-container">
                <!-- HEADER DESKTOP-->
                <header class="header-desktop">
@@ -133,23 +133,23 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                            <img src="{{asset('admin/images/icon/avatar-01.jpg')}}" alt="John Doe" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">Sithu</a>
+                                            <a class="js-acc-btn" href="#">{{Auth::user()->name}}</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                                        <img src="{{asset('admin/images/icon/avatar-01.jpg')}}" alt="John Doe" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#">sithu</a>
+                                                        <a href="#">{{ Auth::user()->name }}</a>
                                                     </h5>
-                                                    <span class="email">sithu@example.com</span>
+                                                    <span class="email">{{ Auth::user()->email }}</span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
@@ -159,8 +159,14 @@
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="#">
-                                                    <i class="zmdi zmdi-power"></i>Logout</a>
+                                                <form action="{{ route('logout') }}" method="post"
+                                                class="d-flex justify-content-center">
+                                                @csrf
+                                                <button class="btn bg-dark text-white col-10" type="submit">
+                                                    <i class="fa-solid fa-arrow-right-from-bracket mr-2"></i>
+                                                    logout
+                                                </button>
+                                            </form>
                                             </div>
                                         </div>
                                     </div>
@@ -171,6 +177,17 @@
                 </div>
             </header>
             <!-- HEADER DESKTOP-->
+
+
+          {{-- to open  <div class="main-content">
+            @yield('content')
+          </div> --}}
+             <!-- MAIN CONTENT-->
+             @yield('content')
+
+             <!-- END MAIN CONTENT-->
+             <!-- END PAGE CONTAINER-->
+
 
         </div>
     </div>
