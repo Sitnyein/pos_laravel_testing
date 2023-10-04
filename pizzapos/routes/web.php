@@ -45,3 +45,9 @@ Route::get('loginPage', [AuthController::class, 'loginPage'])->name('auth#loginP
 Route::get('registerPage', [AuthController::class, 'registerPage'])->name('auth#registerPage');
 
 Route::view('URI', 'viewName');
+
+
+
+Route::get('template',function() {
+    return view('admin.template.template');
+});
