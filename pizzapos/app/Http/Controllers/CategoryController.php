@@ -9,11 +9,16 @@ use Illuminate\Support\Facades\Validator;
 class CategoryController extends Controller
 {
     //listpage
-    public function categorylist()
-    {
-        $categories = Category::get();
-        return view('admin.category.list', compact('categories'));
-    }
+        public function categorylist() {
+            $categories =Category::when(request('key'),function($query){
+             $query->where('name','like','%'.request('key') .'%');
+            })
+            ->orderBy('id','desc')->paginate(4);
+               $categories->appends(request()->all());
+          return view('admin.category.list',compact('categories'));
+      }
+
+
 
     //showcreatepage
     public function categorycreatepage()
@@ -47,11 +52,11 @@ class CategoryController extends Controller
     //really edit page
     public function categoryupdate(Request $request)
 
-    {  
+    {
         $this->categoryValidationCheck($request);
         $data = $this->requestCategoryData($request);
         Category::where('id', $request->categoryId)->update($data);
-        return redirect()->route('category#list');
+        return redirect()->route('category#list')->with(['updateSuccess' => 'Category successful updated ....']);
 
     }
 

@@ -43,6 +43,39 @@
                             </div>
                         </div>
                     @endif
+                    @if (session('updateSuccess'))
+                    <!--alert message create-->
+                    <div class='col-4 offset-8'>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <i class="fa-solid fa-check"></i> {{ session('deleteSuccess') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                    </div>
+                @endif
+
+                <div class="row">
+                    <div class="col-3">
+                        <h4 class="text-secondary">Search Key :<span class="text-danger"> {{ request('key') }}</span>
+                        </h4>
+                    </div>
+                    <div class="col-3 offset-9">
+                        <form action="{{ route('category#list') }}" method="get">
+                            <div class="d-flex">
+                                <input type="text" name="key" class="form-control" placeholder="search..."
+                                    value={{ request('key') }}>
+                                <button class="btn bg-dark text-white" type="submit">
+                                    <i class="fa-solid fa-magnifying-glass "></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-2 offset-10 btn bg-white shadow-sm py-1 px-1 text-center ">
+                        <h3> <i class="fa-solid fa-database mr-2"></i> {{ $categories->total() }} </h3>
+                    </div>
+                </div>
 
                     @if (count($categories) != 0)
                         <div class="table-responsive table-responsive-data2">
@@ -85,7 +118,7 @@
                                 </tbody>
                             </table>
                             <div class="mt-3">
-                                {{-- {{ $categories->appends(request()->query())->links() }} --}}
+                                {{ $categories->appends(request()->query())->links() }}
                                 {{-- {{ $categories->links() }} --}}
                             </div>
                         </div>
