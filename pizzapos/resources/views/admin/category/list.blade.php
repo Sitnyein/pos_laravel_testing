@@ -43,6 +43,7 @@
                             </div>
                         </div>
                     @endif
+
                     @if (count($categories) != 0)
                         <div class="table-responsive table-responsive-data2">
                             <table class="table table-data2 text-center">
@@ -65,7 +66,7 @@
                                         title="View">
                                         <i class="zmdi zmdi-more"></i>
                                     </button> --}}
-                                                    <a href=" ">
+                                                    <a href="{{route('category#editpage',$item->id)}}">
                                                         <button class="item" data-toggle="tooltip" data-placement="top"
                                                             title="Edit">
                                                             <i class="zmdi zmdi-edit"></i>
