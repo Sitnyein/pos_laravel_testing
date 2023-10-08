@@ -45,45 +45,46 @@
 </head>
 
 
-    <body class="animsition">
-        <div class="page-wrapper">
-            <!-- MENU SIDEBAR-->
-            <aside class="menu-sidebar d-none d-lg-block">
-                <div class="logo">
-                    <a href="#">
-                        <img src="{{ asset('admin/images/icon/logo.png') }}" alt="Cool Admin" />
-                    </a>
-                </div>
-                <div class="menu-sidebar__content js-scrollbar1">
-                    <nav class="navbar-sidebar">
-                        <ul class="list-unstyled navbar__list">
-                            <li class="active has-sub">
-                                <a class="js-arrow" href="index.html">
-                                    <i class="fas fa-tachometer-alt"></i>Home Page
-                                </a>
-                            </li>
-                            <li>
-                                <a href="category.html">
-                                    <i class="fas fa-chart-bar"></i>Category</a>
-                            </li>
-                            <li>
-                                <a href="customerList.html">
-                                    <i class="fas fa-chart-bar"></i>Customers</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </aside>
-            <!-- END MENU SIDEBAR-->
-          {{-- PAGE-CONTAINER  --}}
-          <div class="page-container">
-               <!-- HEADER DESKTOP-->
-               <header class="header-desktop">
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <div class="logo">
+                <a href="#">
+                    <img src="{{ asset('admin/images/icon/logo.png') }}" alt="Cool Admin" />
+                </a>
+            </div>
+            <div class="menu-sidebar__content js-scrollbar1">
+                <nav class="navbar-sidebar">
+                    <ul class="list-unstyled navbar__list">
+                        <li class="active has-sub">
+                            <a class="js-arrow" href="index.html">
+                                <i class="fas fa-tachometer-alt"></i>Home Page
+                            </a>
+                        </li>
+                        <li>
+                            <a href="category.html">
+                                <i class="fas fa-chart-bar"></i>Category</a>
+                        </li>
+                        <li>
+                            <a href="customerList.html">
+                                <i class="fas fa-chart-bar"></i>Customers</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+        {{-- PAGE-CONTAINER  --}}
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            <header class="header-desktop">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
+                                <input class="au-input au-input--xl" type="text" name="search"
+                                    placeholder="Search for datas &amp; reports..." />
                                 <button class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
                                 </button>
@@ -133,16 +134,18 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="{{asset('admin/images/icon/avatar-01.jpg')}}" alt="John Doe" />
+                                            <img src="{{ asset('admin/images/icon/avatar-01.jpg') }}"
+                                                alt="John Doe" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">{{Auth::user()->name}}</a>
+                                            <a class="js-acc-btn" href="#">{{ Auth::user()->name }}</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="{{asset('admin/images/icon/avatar-01.jpg')}}" alt="John Doe" />
+                                                        <img src="{{ asset('admin/images/icon/avatar-01.jpg') }}"
+                                                            alt="John Doe" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
@@ -158,15 +161,23 @@
                                                         <i class="zmdi zmdi-account"></i>Account</a>
                                                 </div>
                                             </div>
-                                            <div class="account-dropdown__footer">
+                                            {{-- change password  --}}
+                                            <div class="account-dropdown__body">
+                                                <div class="account-dropdown__item">
+                                                    <a href="{{route('changepw#page')}}">
+                                                        <i class="fa-solid fa-key"></i>
+                                                        Change password</a>
+                                                </div>
+                                            </div>
+                                            <div class="account-dropdown__footer my-2">
                                                 <form action="{{ route('logout') }}" method="post"
-                                                class="d-flex justify-content-center">
-                                                @csrf
-                                                <button class="btn bg-dark text-white col-10" type="submit">
-                                                    <i class="fa-solid fa-arrow-right-from-bracket mr-2"></i>
-                                                    logout
-                                                </button>
-                                            </form>
+                                                    class="d-flex justify-content-center">
+                                                    @csrf
+                                                    <button class="btn bg-dark text-white col-10" type="submit">
+                                                        <i class="fa-solid fa-arrow-right-from-bracket mr-2"></i>
+                                                        logout
+                                                    </button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -179,14 +190,14 @@
             <!-- HEADER DESKTOP-->
 
 
-          {{-- to open  <div class="main-content">
+            {{-- to open  <div class="main-content">
             @yield('content')
           </div> --}}
-             <!-- MAIN CONTENT-->
-             @yield('content')
+            <!-- MAIN CONTENT-->
+            @yield('content')
 
-             <!-- END MAIN CONTENT-->
-             <!-- END PAGE CONTAINER-->
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
 
 
         </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
@@ -27,12 +28,21 @@ Route::middleware([
     Route::group(['prefix' => 'category', 'middleware' => "admin_auth"], function () {
 
         Route::get('list', [CategoryController::class, 'categorylist'])->name('category#list');
-        Route::get('createpage',[CategoryController::class,'categorycreatepage'])->name('category#createpage');
-        Route::post('create',[CategoryController::class,'categorycreate'])->name('category#create');
-        Route::get('delete/{id}',[CategoryController::class,'categorydelete'])->name('category#delete');
-        Route::get('editpage/{id}',[CategoryController::class,'categoryeditpage'])->name('category#editpage');
-        Route::post('update',[CategoryController::class,'categoryupdate'])->name('category#update');
+        Route::get('createpage', [CategoryController::class, 'categorycreatepage'])->name('category#createpage');
+        Route::post('create', [CategoryController::class, 'categorycreate'])->name('category#create');
+        Route::get('delete/{id}', [CategoryController::class, 'categorydelete'])->name('category#delete');
+        Route::get('editpage/{id}', [CategoryController::class, 'categoryeditpage'])->name('category#editpage');
+        Route::post('update', [CategoryController::class, 'categoryupdate'])->name('category#update');
 
+    });
+
+    Route::middleware(['admin_auth'])->group(function () {
+        Route::prefix('admin')->group(function () {
+            //password changepage
+            Route::get('pwchangepage', [AdminController::class, 'changepwpage'])->name('changepw#page');
+            //password change
+            Route::post('passwordchange',[AdminController::class,'changepassword'])->name('change#password');
+        });
 
     });
 
@@ -53,11 +63,9 @@ Route::get('registerPage', [AuthController::class, 'registerPage'])->name('auth#
 
 Route::view('URI', 'viewName');
 
-
-
-Route::get('template',function() {
+Route::get('template', function () {
     return view('admin.template.template');
 });
-Route::get('test/category',function() {
+Route::get('test/category', function () {
     return view('admin.category.create');
 });
