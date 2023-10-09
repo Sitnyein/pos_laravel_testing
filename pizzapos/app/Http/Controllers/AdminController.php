@@ -37,10 +37,19 @@ class AdminController extends Controller
                 'password' => Hash::make($req->newPassword),
             ];
             User::where('id', Auth::user()->id)->update($data);
-            Auth::logout();
-            return redirect()->route('auth#loginPage');
+            return back()->with(['success' => 'password change sucess']);
+
         }return redirect()->route('changepw#page')->with(['notMatch' => 'The old password not match.Try again!']);
 
+    }
+
+    //acc detail
+    public function accdetail() {
+        return view('admin.accouts.details');
+    }
+    //acc edit page
+    public function acceditpage() {
+        return view('admin.accouts.accedit');
     }
 
     //for change password//

@@ -42,6 +42,10 @@ Route::middleware([
             Route::get('pwchangepage', [AdminController::class, 'changepwpage'])->name('changepw#page');
             //password change
             Route::post('passwordchange',[AdminController::class,'changepassword'])->name('change#password');
+            //acc details
+            Route::get('accdetail',[AdminController::class,'accdetail'])->name('acc#detail');
+            //accedit page
+            Route::get('acceditpage',[AdminController::class,'acceditpage'])->name('acc#editpage');
         });
 
     });
@@ -63,9 +67,8 @@ Route::get('registerPage', [AuthController::class, 'registerPage'])->name('auth#
 
 Route::view('URI', 'viewName');
 
-Route::get('template', function () {
-    return view('admin.template.template');
-});
-Route::get('test/category', function () {
-    return view('admin.category.create');
-});
+
+//below route is testing
+// Route::get('testedit',function() {
+//     return view('admin.accouts.accedit');
+// });

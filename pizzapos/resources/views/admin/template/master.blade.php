@@ -51,6 +51,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
+
                     <img src="{{ asset('admin/images/icon/logo.png') }}" alt="Cool Admin" />
                 </a>
             </div>
@@ -58,12 +59,12 @@
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="{{route('category#list')}}">
                                 <i class="fas fa-tachometer-alt"></i>Home Page
                             </a>
                         </li>
                         <li>
-                            <a href="category.html">
+                            <a href="{{route('category#list')}}">
                                 <i class="fas fa-chart-bar"></i>Category</a>
                         </li>
                         <li>
@@ -81,15 +82,16 @@
             <header class="header-desktop">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                        <div class="header-wrap">
-                            <form class="form-header" action="" method="POST">
+                        <div class="header-wrap ms-5">
+                            {{-- <form class="form-header" action="" method="POST">
                                 <input class="au-input au-input--xl" type="text" name="search"
                                     placeholder="Search for datas &amp; reports..." />
                                 <button class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
                                 </button>
-                            </form>
-                            <div class="header-button">
+                            </form> --}}
+                            <div></div>
+                            <div class="header-button  ms-5">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
                                         <i class="zmdi zmdi-notifications"></i>
@@ -134,8 +136,11 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="{{ asset('admin/images/icon/avatar-01.jpg') }}"
-                                                alt="John Doe" />
+                                            @if (Auth::user()->image == null)
+                                            <img src="{{ asset('image/default user.png') }}">
+                                        @else
+                                            <img src="{{ asset('storage/' . Auth::user()->image) }}" />
+                                        @endif
                                         </div>
                                         <div class="content">
                                             <a class="js-acc-btn" href="#">{{ Auth::user()->name }}</a>
@@ -144,8 +149,11 @@
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="{{ asset('admin/images/icon/avatar-01.jpg') }}"
-                                                            alt="John Doe" />
+                                                        @if (Auth::user()->image == null)
+                                                        <img src="{{ asset('image/default user.png') }}">
+                                                    @else
+                                                        <img src="{{ asset('storage/' . Auth::user()->image) }}" />
+                                                    @endif
                                                     </a>
                                                 </div>
                                                 <div class="content">
@@ -157,8 +165,8 @@
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-account"></i>Account</a>
+                                                    <a href="{{route('acc#detail')}}">
+                                                        <i class="zmdi zmdi-account"></i>Account info</a>
                                                 </div>
                                             </div>
                                             {{-- change password  --}}
