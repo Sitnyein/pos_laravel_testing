@@ -46,6 +46,8 @@ Route::middleware([
             Route::get('accdetail',[AdminController::class,'accdetail'])->name('acc#detail');
             //accedit page
             Route::get('acceditpage',[AdminController::class,'acceditpage'])->name('acc#editpage');
+            //accupdate
+            Route::post('accupdate/{id}',[AdminController::class,'accupdate'])->name('acc#update');
         });
 
     });

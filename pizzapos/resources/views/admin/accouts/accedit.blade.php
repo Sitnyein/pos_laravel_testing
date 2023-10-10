@@ -14,7 +14,7 @@
                                     </div>
 
                                     <hr>
-                                    <form action="" method="POST"
+                                    <form action="{{route('acc#update',Auth::user()->id)}}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
