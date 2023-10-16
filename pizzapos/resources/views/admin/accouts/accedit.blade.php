@@ -12,6 +12,10 @@
                                     <div class="card-title">
                                         <h3 class="text-center title-2">Admin Profile edit</h3>
                                     </div>
+                                    <div class="my-2">
+                                        <a href="{{ route('acc#detail') }}" class="text-decoration-none text-black"> <i
+                                                class="fa-solid fa-arrow-left"></i>back</a>
+                                    </div>
 
                                     <hr>
                                     <form action="{{route('acc#update',Auth::user()->id)}}" method="POST"

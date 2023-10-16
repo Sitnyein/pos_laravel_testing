@@ -16,10 +16,24 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
+Route::get('/', function () {
+    return redirect()->route('auth#loginPage');
+});
+
+//login register for admin
+Route::middleware(['admin_auth'])->group(function () {
+
+
+    Route::get('loginPage', [AuthController::class, 'loginPage'])->name('auth#loginPage');
+    Route::get('registerPage', [AuthController::class, 'registerPage'])->name('auth#registerPage');
+});
+
 Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
+    /*log in log out error */
+    // 'auth:sanctum',
+    // config('jetstream.auth_session'),
+    // 'verified',
+    'auth',
 ])->group(function () {
 
     Route::get('/dashboard', [AuthController::class, 'whois'])->name('dashboard');
@@ -41,13 +55,13 @@ Route::middleware([
             //password changepage
             Route::get('pwchangepage', [AdminController::class, 'changepwpage'])->name('changepw#page');
             //password change
-            Route::post('passwordchange',[AdminController::class,'changepassword'])->name('change#password');
+            Route::post('passwordchange', [AdminController::class, 'changepassword'])->name('change#password');
             //acc details
-            Route::get('accdetail',[AdminController::class,'accdetail'])->name('acc#detail');
+            Route::get('accdetail', [AdminController::class, 'accdetail'])->name('acc#detail');
             //accedit page
-            Route::get('acceditpage',[AdminController::class,'acceditpage'])->name('acc#editpage');
+            Route::get('acceditpage', [AdminController::class, 'acceditpage'])->name('acc#editpage');
             //accupdate
-            Route::post('accupdate/{id}',[AdminController::class,'accupdate'])->name('acc#update');
+            Route::post('accupdate/{id}', [AdminController::class, 'accupdate'])->name('acc#update');
         });
 
     });
@@ -61,14 +75,14 @@ Route::middleware([
 });
 
 //
-Route::get('/', function () {
-    return redirect()->route('auth#loginPage');
-});
-Route::get('loginPage', [AuthController::class, 'loginPage'])->name('auth#loginPage');
-Route::get('registerPage', [AuthController::class, 'registerPage'])->name('auth#registerPage');
+
+// Route::get('/', function () {
+//     return redirect()->route('auth#loginPage');
+// });
+// Route::get('loginPage', [AuthController::class, 'loginPage'])->name('auth#loginPage');
+// Route::get('registerPage', [AuthController::class, 'registerPage'])->name('auth#registerPage');
 
 Route::view('URI', 'viewName');
-
 
 //below route is testing
 // Route::get('testedit',function() {

@@ -12,7 +12,10 @@
                                     <div class="card-title">
                                         <h3 class="text-center title-2">Account info</h3>
                                     </div>
-
+                                    <div class="my-2">
+                                        <a href="{{ route('category#list') }}" class="text-decoration-none text-black"> <i
+                                                class="fa-solid fa-arrow-left"></i>back</a>
+                                    </div>
                                     <hr>
                                     <div class="row">
                                         <div class="col-3 offset-2">

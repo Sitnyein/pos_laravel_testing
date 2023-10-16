@@ -16,9 +16,10 @@ class Adminauth
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request, Closure $next)
-    {if (!empty(Auth::user())) {
+    { if (!empty(Auth::user())) {
         if (url()->current() == route('auth#loginPage') || url()->current() == route('auth#registerPage')) {
             return back();
+
         }
         if (Auth::user()->role == "user") {
             return back();
