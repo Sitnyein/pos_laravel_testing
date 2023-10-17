@@ -68,6 +68,10 @@ Route::middleware([
         /* for products*/
         Route::prefix('product')->group(function () {
            Route::get('list',[ProductController::class,'productlist'])->name('product#list');
+           //createpiza page
+           Route::get('page',[ProductController::class,'pizzapage'])->name('pizza#page');
+           //only create piza
+           Route::post('create',[ProductController::class,'pizzacreate'])->name('pizza#create');
 
         });
 
