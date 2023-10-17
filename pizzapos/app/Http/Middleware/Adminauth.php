@@ -17,7 +17,7 @@ class Adminauth
      */
     public function handle(Request $request, Closure $next)
     { if (!empty(Auth::user())) {
-        if (url()->current() == route('auth#loginPage') || url()->current() == route('auth#registerPage')) {
+        if (url()->current() == route('auth#loginPage') || url()->current() == route('auth#registerPage') ||  url()->current() ==route('short#cut')) {
             return back();
 
         }

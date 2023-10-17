@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect()->route('auth#loginPage');
-});
+})->name('short#cut');
+
 
 //login register for admin
 Route::middleware(['admin_auth'])->group(function () {
@@ -62,6 +64,11 @@ Route::middleware([
             Route::get('acceditpage', [AdminController::class, 'acceditpage'])->name('acc#editpage');
             //accupdate
             Route::post('accupdate/{id}', [AdminController::class, 'accupdate'])->name('acc#update');
+        });
+        /* for products*/
+        Route::prefix('product')->group(function () {
+           Route::get('list',[ProductController::class,'productlist'])->name('product#list');
+
         });
 
     });
