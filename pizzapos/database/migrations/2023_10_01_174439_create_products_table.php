@@ -21,7 +21,7 @@ return new class extends Migration
             $table->longtext('description');
             $table->string('image')->nullable();
             $table->integer('price');
-            $table->integer('view-count')->default(0);
+            $table->integer('view_count')->default(0);
             $table->timestamps();
         });
     }

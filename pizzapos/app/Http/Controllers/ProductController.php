@@ -9,10 +9,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
-{
+{   //read
     public function productlist() {
-        return view('admin.products.plist');
+        $products  = Product::get();
+        return view('admin.products.plist',compact('products'));
     }
+    /*  $categories =Category::when(request('key'),function($query){
+             $query->where('name','like','%'.request('key') .'%');
+            })
+            ->orderBy('id','desc')->paginate(4);
+               $categories->appends(request()->all());
+          return view('admin.category.list',compact('categories'));*/
 
     //create page
     public function pizzapage() {

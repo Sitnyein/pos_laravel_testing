@@ -75,7 +75,66 @@
                         <h3> <i class="fa-solid fa-database mr-2"></i> 15 </h3>
                     </div>
                 </div>
-       {{-- table  --}}
+                @if (count($products) != 0)
+                <div class="table-responsive table-responsive-data2 mt-3">
+                    <table class="table table-data2 text-center">
+                        <thead>
+                            <tr>
+                                <th> image </th>
+                                <th>CategoryId</th>
+                                <th>PizzaName</th>
+                                <th>CookingTime</th>
+                                <th>Price</th>
+                                <th>ViewCount</th>
+                                <th>ChefOptions</th>
+                                {{-- <th>Menu release Date</th> --}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($products as $item)
+                                <tr class="tr-shadow">
+                                    <td class="col-2">
+                                        <img style="height: 100px; width:100px" src="{{asset('storage/'.$item->image)}}" alt="">
+                                    </td>
+                                    <td>{{ $item->category_id }}</td>
+                                    <td>{{$item->name}}</td>
+                                    <td class="col-1">{{ $item->waiting_time." min" }}</td>
+                                    <td>{{$item->price}}</td>
+                                    <td>{{$item->view_count}}</td>
+                                    {{-- <td>{{ $item->created_at->format('j-F-Y') }}</td>  --}}
+                                    <td>
+                                        <div class="table-data-feature">
+                                            <button class="item" data-toggle="tooltip" data-placement="top"
+                                title="View">
+                                <i class="zmdi zmdi-more"></i>
+                            </button>
+                                            <a href="">
+                                                <button class="item" data-toggle="tooltip" data-placement="top"
+                                                    title="Edit">
+                                                    <i class="zmdi zmdi-edit"></i>
+                                                </button>
+                                            </a>
+                                            <a href="">
+                                                <button class="item" data-toggle="tooltip" data-placement="top"
+                                                    title="Delete">
+                                                    <i class="zmdi zmdi-delete"></i>
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <div class="mt-3">
+                        {{-- {{ $categories->appends(request()->query())->links() }} --}}
+                        {{-- {{ $categories->links() }} --}}
+                    </div>
+                </div>
+            @else
+                <h3 class="text-danger text-center mt-5">There is no product avaliable right now </h3>
+            @endif
+
 
 
                     <!-- END DATA TABLE -->
