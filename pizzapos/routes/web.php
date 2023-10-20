@@ -72,6 +72,10 @@ Route::middleware([
            Route::get('page',[ProductController::class,'pizzapage'])->name('pizza#page');
            //only create piza
            Route::post('create',[ProductController::class,'pizzacreate'])->name('pizza#create');
+           //delete pizza
+           Route::get('delete/{id}',[ProductController::class,'pizadelete'])->name('pizza#delete');
+           //showing more detail
+           Route::get('moredetail/{id}',[ProductController::class,'moreinfo'])->name('pizza#detail');
 
         });
 
