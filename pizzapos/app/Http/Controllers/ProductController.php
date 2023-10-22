@@ -66,6 +66,12 @@ class ProductController extends Controller
 
     }
 
+    //edit page
+    public function edit($id) {
+        $product = Product::where('id',$id)->first();
+        return view('admin.products.pedit',compact('product'));
+    }
+
     //createpizza
     private function createproduct($request)
     {

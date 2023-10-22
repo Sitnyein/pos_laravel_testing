@@ -76,6 +76,8 @@ Route::middleware([
            Route::get('delete/{id}',[ProductController::class,'pizadelete'])->name('pizza#delete');
            //showing more detail
            Route::get('moredetail/{id}',[ProductController::class,'moreinfo'])->name('pizza#detail');
+           //edit page
+           Route::get('edit/{id}',[ProductController::class,'edit'])->name('pizza#edit');
 
         });
 

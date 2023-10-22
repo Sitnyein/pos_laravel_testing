@@ -110,7 +110,7 @@
                                                     <i class="zmdi zmdi-more"></i>
                                                 </button>
                                                    </a>
-                                                    <a href="">
+                                                    <a href="{{route('pizza#edit',$item->id)}}">
                                                         <button class="item" data-toggle="tooltip" data-placement="top"
                                                             title="Edit">
                                                             <i class="zmdi zmdi-edit"></i>
