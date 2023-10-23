@@ -64,6 +64,8 @@ Route::middleware([
             Route::get('acceditpage', [AdminController::class, 'acceditpage'])->name('acc#editpage');
             //accupdate
             Route::post('accupdate/{id}', [AdminController::class, 'accupdate'])->name('acc#update');
+            //admin list
+            Route::get('list',[AdminController::class,'adminlist'])->name('admin#list');
         });
         /* for products*/
         Route::prefix('product')->group(function () {

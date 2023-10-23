@@ -24,7 +24,11 @@
                                         <div class="row">
                                             <div class="col-4 offset-1">
                                                 @if (Auth::user()->image == null)
-                                                    <img src="{{ asset('image/default user.png') }}" class="shadow-sm ">
+                                                @if(Auth::user()->gender == 'male')
+                                                <img src="{{ asset('image/default user.png') }}" class="shadow-sm">
+                                               @else
+                                               <img src="{{asset('image/girl.png')}}" class=" w-75 shadow-sm">
+                                               @endif
                                                 @else
                                                     <img src="{{ asset('storage/' . Auth::user()->image) }}" />
                                                 @endif

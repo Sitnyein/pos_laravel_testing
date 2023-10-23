@@ -59,16 +59,16 @@
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
-                            <a class="js-arrow" href="{{route('category#list')}}">
+                            <a class="js-arrow" href="{{ route('category#list') }}">
                                 <i class="fas fa-tachometer-alt"></i>Home Page
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('category#list')}}">
+                            <a href="{{ route('category#list') }}">
                                 <i class="fas fa-chart-bar"></i>Category</a>
                         </li>
                         <li>
-                            <a href="{{route('product#list')}}">
+                            <a href="{{ route('product#list') }}">
                                 <i class="fa-solid fa-pizza-slice"></i>Products</a>
                         </li>
                     </ul>
@@ -137,10 +137,15 @@
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
                                             @if (Auth::user()->image == null)
-                                            <img src="{{ asset('image/default user.png') }}">
-                                        @else
-                                            <img src="{{ asset('storage/' . Auth::user()->image) }}" />
-                                        @endif
+                                                @if (Auth::user()->gender == 'male')
+                                                    <img src="{{ asset('image/default user.png') }}"
+                                                        class="shadow-sm">
+                                                @else
+                                                    <img src="{{ asset('image/girl.png') }}" class=" w-75 shadow-sm">
+                                                @endif
+                                            @else
+                                                <img src="{{ asset('storage/' . Auth::user()->image) }}" />
+                                            @endif
                                         </div>
                                         <div class="content">
                                             <a class="js-acc-btn" href="#">{{ Auth::user()->name }}</a>
@@ -150,10 +155,17 @@
                                                 <div class="image">
                                                     <a href="#">
                                                         @if (Auth::user()->image == null)
-                                                        <img src="{{ asset('image/default user.png') }}">
-                                                    @else
-                                                        <img src="{{ asset('storage/' . Auth::user()->image) }}" />
-                                                    @endif
+                                                            @if (Auth::user()->gender == 'male')
+                                                                <img src="{{ asset('image/default user.png') }}"
+                                                                    class="shadow-sm">
+                                                            @else
+                                                                <img src="{{ asset('image/girl.png') }}"
+                                                                    class=" w-75 shadow-sm">
+                                                            @endif
+                                                        @else
+                                                            <img
+                                                                src="{{ asset('storage/' . Auth::user()->image) }}" />
+                                                        @endif
                                                     </a>
                                                 </div>
                                                 <div class="content">
@@ -165,14 +177,21 @@
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a href="{{route('acc#detail')}}">
+                                                    <a href="{{ route('acc#detail') }}">
                                                         <i class="zmdi zmdi-account"></i>Account info</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="account-dropdown__body">
+                                                <div class="account-dropdown__item">
+                                                    <a href="{{ route('admin#list') }}">
+                                                        <i class="fa-solid fa-users"></i>Admin list</a>
                                                 </div>
                                             </div>
                                             {{-- change password  --}}
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a href="{{route('changepw#page')}}">
+                                                    <a href="{{ route('changepw#page') }}">
                                                         <i class="fa-solid fa-key"></i>
                                                         Change password</a>
                                                 </div>

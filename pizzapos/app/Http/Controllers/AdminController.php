@@ -77,6 +77,16 @@ public function accupdate($id,Request $request) {
    }
 
 
+   //admin list
+   public function adminlist() {
+    $admin = User::when(request('key'),function($query) {
+        $query->orWhere('name','like','%'.request('key').'%')
+        ->orWhere('address','like','%'.request('key').'%');
+    })->where('role','admin')->paginate(3);
+    $admin->appends(request()->all());
+     return view('admin.accouts.adminlist',compact('admin'));
+   }
+
 
 
    //get user data for adedit

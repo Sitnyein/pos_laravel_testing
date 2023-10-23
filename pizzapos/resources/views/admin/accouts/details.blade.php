@@ -20,7 +20,11 @@
                                     <div class="row">
                                         <div class="col-3 offset-2">
                                             @if (Auth::user()->image == null)
-                                                <img src="{{ asset('image/default user.png') }}" class="shadow-sm">
+                                                @if (Auth::user()->gender == 'male')
+                                                    <img src="{{ asset('image/default user.png') }}" class="shadow-sm">
+                                                @else
+                                                    <img src="{{ asset('image/girl.png') }}" class=" w-75 shadow-sm">
+                                                @endif
                                             @else
                                                 <img src="{{ asset('storage/' . Auth::user()->image) }}" />
                                             @endif
@@ -47,7 +51,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-4 offset-2 mt-3">
-                                            <a href="{{route('acc#editpage')}}">
+                                            <a href="{{ route('acc#editpage') }}">
                                                 <button class="btn bg-dark text-white submit">
                                                     <i class="fa-solid fa-pen-to-square me-2"></i> Edit profile
                                                 </button>
