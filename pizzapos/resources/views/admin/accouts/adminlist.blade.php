@@ -21,16 +21,7 @@
 
                         </div>
                     </div>
-                    @if (session('createSuccess'))
-                        <!--alert message create-->
-                        <div class='col-4 offset-8'>
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <i class="fa-solid fa-check"></i> {{ session('createSuccess') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                        </div>
-                    @endif
+                   
                     @if (session('deleteSuccess'))
                         <!--alert message create-->
                         <div class='col-4 offset-8'>
@@ -129,7 +120,7 @@
                                                         <i class="zmdi zmdi-edit"></i>
                                                     </button>
                                                 </a>
-                                                <a href=" ">
+                                                <a href="{{route('acc#delete',$a->id)}} ">
                                                     <button class="item" data-toggle="tooltip" data-placement="top"
                                                         title="Delete">
                                                         <i class="zmdi zmdi-delete"></i>

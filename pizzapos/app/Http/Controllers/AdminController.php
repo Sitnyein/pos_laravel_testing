@@ -88,6 +88,22 @@ public function accupdate($id,Request $request) {
    }
 
 
+   //admin delete account
+   public function accdelete($id) {
+    {   $dbimage = User::where('id', $id)->first();
+        $dbimage = $dbimage->image;
+        if($dbimage !== null) {
+            Storage::delete(['public/', $dbimage]);
+
+        }
+
+        $product = User::where('id', $id)->delete();
+        return redirect()->route('admin#list')->with(['deleteSuccess' => 'You have  removed  account ....']);
+
+    }
+
+   }
+
 
    //get user data for adedit
    private function getUserdata($request) {
