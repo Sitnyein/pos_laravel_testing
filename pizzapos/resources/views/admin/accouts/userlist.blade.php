@@ -8,17 +8,9 @@
                     <div class="table-data__tool">
                         <div class="table-data__tool-left">
                             <div class="overview-wrap">
-                                <h2 class="title-1">Admin List</h2>
+                                <h2 class="title-1">User List</h2>
 
                             </div>
-                        </div>
-                        <div class="table-data__tool-right">
-                            <a href="">
-                                <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                    <i class="zmdi zmdi-plus"></i>Add Admin Role
-                                </button>
-                            </a>
-
                         </div>
                     </div>
 
@@ -40,7 +32,7 @@
                         </h4>
                     </div>
                     <div class="col-3 offset-9">
-                        <form action="{{ route('admin#list') }}" method="get">
+                        <form action="{{ route('adminwant#userlist') }}" method="get">
                             <div class="d-flex">
                                 <input type="text" name="key" class="form-control" placeholder="search..."
                                     value={{ request('key') }}>
@@ -96,18 +88,9 @@
                                             <td>
                                                 <div class="table-data-feature">
 
-                                                  @if(Auth::user()->id === $a->id)
-
-                                                        <a href="{{ route('acc#detail') }}">
-                                                            <button class="item" data-toggle="tooltip" data-placement="top"
-                                                    title="View">
-                                                    <i class="zmdi zmdi-more"></i>
-                                                </button></a>
-
-                                                  @else
-                                                  <a href="">
+                                                 <a href="{{route('change#role',$a->id)}}">
                                                     <button class="item" data-toggle="tooltip" data-placement="top"
-                                                        title="Edit">
+                                                        title="Change Role">
                                                         <i class="zmdi zmdi-edit"></i>
                                                     </button>
                                                 </a>
@@ -117,7 +100,7 @@
                                                         <i class="zmdi zmdi-delete"></i>
                                                     </button>
                                                 </a>
-                                                @endif
+
                                                 </div>
                                             </td>
                                         </tr>

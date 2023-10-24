@@ -21,7 +21,7 @@
 
                         </div>
                     </div>
-                   
+
                     @if (session('deleteSuccess'))
                         <!--alert message create-->
                         <div class='col-4 offset-8'>
@@ -66,7 +66,7 @@
                     </div>
                 </div>
 
-                    @if (count($admin) != 0)
+                    @if (count($admin) != 0 )
                         <div class="table-responsive table-responsive-data2">
                             <table class="table table-data2 text-center">
                                 <thead>
@@ -114,9 +114,9 @@
                                                 </button></a>
 
                                                   @else
-                                                  <a href="">
+                                                  <a href="{{route('change#role',$a->id)}}">
                                                     <button class="item" data-toggle="tooltip" data-placement="top"
-                                                        title="Edit">
+                                                        title="Change role">
                                                         <i class="zmdi zmdi-edit"></i>
                                                     </button>
                                                 </a>
@@ -134,7 +134,9 @@
                                 </tbody>
                             </table>
                             <div class="mt-3">
-                                {{ $admin->links() }}
+                                {{-- {{ $admin->links() }}  --}}
+                                {{ $admin->appends(request()->query())->links() }}
+
                             </div>
                         </div>
                     @else

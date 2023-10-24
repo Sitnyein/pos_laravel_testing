@@ -79,11 +79,17 @@ public function accupdate($id,Request $request) {
 
    //admin list
    public function adminlist() {
+    $user = User::where('role','admin')->get();
+
     $admin = User::when(request('key'),function($query) {
-        $query->orWhere('name','like','%'.request('key').'%')
-        ->orWhere('address','like','%'.request('key').'%');
+        $query->Where('name','like','%'.request('key').'%');
+
+        // ->Where('address','like','%'.request('key').'%');
     })->where('role','admin')->paginate(3);
-    $admin->appends(request()->all());
+
+
+    // $admin->appends(request()->all());
+
      return view('admin.accouts.adminlist',compact('admin'));
    }
 
@@ -104,11 +110,22 @@ public function accupdate($id,Request $request) {
 
    }
 
-   //admin want to see useliist
+   //admin change role
+   public function changerole($id) {
+    $user = User::where('id',$id)->first();
+
+
+     User::where('id',$id)->update([
+        'role' => 'user' ]);
+        return redirect()->route('admin#list')->with(['deleteSuccess' => 'You have  change role   account ....']);
+
+
+   }
+//    admin want to see useliist
    public function userlist() {
     $user = User::when(request('key'),function($query) {
-        $query->orWhere('name','like','%'.request('key').'%')
-        ->orWhere('address','like','%'.request('key').'%');
+        $query->Where('name','like','%'.request('key').'%');
+        // ->orWhere('address','like','%'.request('key').'%');
     })->where('role','user')->paginate(3);
     $user->appends(request()->all());
      return view('admin.accouts.userlist',compact('user'));

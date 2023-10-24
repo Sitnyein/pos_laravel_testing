@@ -68,6 +68,8 @@ Route::middleware([
             Route::get('list',[AdminController::class,'adminlist'])->name('admin#list');
             //account delete from admin list
             Route::get('delete/{id}',[AdminController::class,'accdelete'])->name('acc#delete');
+            //admin want to change role from adminlist
+            Route::get('changerole/{id}',[AdminController::class,'changerole'])->name('change#role');
             //admin want to see userlist
             Route::get('wantuser/list',[AdminController::class,'userlist'])->name('adminwant#userlist');
         });
