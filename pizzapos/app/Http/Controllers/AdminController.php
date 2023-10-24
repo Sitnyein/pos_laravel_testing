@@ -104,6 +104,16 @@ public function accupdate($id,Request $request) {
 
    }
 
+   //admin want to see useliist
+   public function userlist() {
+    $user = User::when(request('key'),function($query) {
+        $query->orWhere('name','like','%'.request('key').'%')
+        ->orWhere('address','like','%'.request('key').'%');
+    })->where('role','user')->paginate(3);
+    $user->appends(request()->all());
+     return view('admin.accouts.userlist',compact('user'));
+   }
+
 
    //get user data for adedit
    private function getUserdata($request) {

@@ -71,6 +71,10 @@
                             <a href="{{ route('product#list') }}">
                                 <i class="fa-solid fa-pizza-slice"></i>Products</a>
                         </li>
+                        <li>
+                            <a href="{{route('adminwant#userlist')}}">
+                                <i class="fa-solid fa-id-badge"></i>UserList</a>
+                        </li>
                     </ul>
                 </nav>
             </div>

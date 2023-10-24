@@ -66,8 +66,10 @@ Route::middleware([
             Route::post('accupdate/{id}', [AdminController::class, 'accupdate'])->name('acc#update');
             //admin list
             Route::get('list',[AdminController::class,'adminlist'])->name('admin#list');
-            //account delete
+            //account delete from admin list
             Route::get('delete/{id}',[AdminController::class,'accdelete'])->name('acc#delete');
+            //admin want to see userlist
+            Route::get('wantuser/list',[AdminController::class,'userlist'])->name('adminwant#userlist');
         });
         /* for products*/
         Route::prefix('product')->group(function () {
