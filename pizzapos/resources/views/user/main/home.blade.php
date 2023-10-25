@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,8 +10,13 @@
 <body>
       <h1>this is user home page</h1>
       <h3>{{Auth::user()->role}}</h3>
-      <form action="{{route('logout')}}" method="post" class="text-start">
-        @csrf
-        <button class="btn btn-primary text-white">logout</button>
-      </form></body>
-</html>
+      </body>
+</html> --}}
+@extends('user.utemplate.master')
+@section('content')
+<h1>log out chankhine</h1>
+<form action="{{route('logout')}}" method="post" class="text-start">
+    @csrf
+    <button class="btn btn-primary text-black">logout</button>
+  </form>
+@endsection

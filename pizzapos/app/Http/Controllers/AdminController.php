@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -46,115 +46,118 @@ class AdminController extends Controller
     }
 
     //acc detail
-    public function accdetail() {
+    public function accdetail()
+    {
         return view('admin.accouts.details');
     }
     //acc edit page
-    public function acceditpage() {
+    public function acceditpage()
+    {
         return view('admin.accouts.accedit');
     }
 
     //admin update/edit acc
-public function accupdate($id,Request $request) {
+    public function accupdate($id, Request $request)
+    {
 
-    $this->accValidationCheck($request);
-    $data = $this->getUserdata($request);
-   //for image
-   if($request->hasFile('image')) {
-     $dbimage = User::where('id',$id)->first();
-     $dbimage= $dbimage->image;
-     if($dbimage != null) {
-       Storage::delete(['public/',$dbimage]);
-     }
-   $fileName= uniqid() . $request->file('image')->getClientOriginalName();
-   $request->file('image')->storeAs('public',$fileName); //db public save
-   $data['image'] = $fileName;
-   }
+        $this->accValidationCheck($request);
+        $data = $this->getUserdata($request);
+        //for image
+        if ($request->hasFile('image')) {
+            $dbimage = User::where('id', $id)->first();
+            $dbimage = $dbimage->image;
+            if ($dbimage != null) {
+                Storage::delete(['public/', $dbimage]);
+            }
+            $fileName = uniqid() . $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('public', $fileName); //db public save
+            $data['image'] = $fileName;
+        }
 
+        User::where('id', $id)->update($data);
+        return redirect()->route('acc#detail');
+    }
 
-    User::where('id',$id)->update($data);
-    return redirect()->route('acc#detail');
-   }
+    //admin list
+    public function adminlist()
+    {
+        $user = User::where('role', 'admin')->get();
+        $admin = User::when(request('key'), function ($query) {
+            $query->Where('name', 'like', '%' . request('key') . '%');
+            // ->Where('address','like','%'.request('key').'%');
+        })->where('role', 'admin')->paginate(3);
+        $admin->appends(request()->all());
+        return view('admin.accouts.adminlist', compact('admin'));
+    }
 
+    //admin delete account
+    public function accdelete($id)
+    {
+        { $dbimage = User::where('id', $id)->first();
+            $dbimage = $dbimage->image;
+            if ($dbimage !== null) {
+                Storage::delete(['public/', $dbimage]);
 
-   //admin list
-   public function adminlist() {
-    $user = User::where('role','admin')->get();
+            }
 
-    $admin = User::when(request('key'),function($query) {
-        $query->Where('name','like','%'.request('key').'%');
-
-        // ->Where('address','like','%'.request('key').'%');
-    })->where('role','admin')->paginate(3);
-
-
-    // $admin->appends(request()->all());
-
-     return view('admin.accouts.adminlist',compact('admin'));
-   }
-
-
-   //admin delete account
-   public function accdelete($id) {
-    {   $dbimage = User::where('id', $id)->first();
-        $dbimage = $dbimage->image;
-        if($dbimage !== null) {
-            Storage::delete(['public/', $dbimage]);
+            $product = User::where('id', $id)->delete();
+            return redirect()->route('admin#list')->with(['deleteSuccess' => 'You have  removed  account ....']);
 
         }
 
-        $product = User::where('id', $id)->delete();
-        return redirect()->route('admin#list')->with(['deleteSuccess' => 'You have  removed  account ....']);
-
     }
 
-   }
-
-   //admin change role
-   public function changerole($id) {
-    $user = User::where('id',$id)->first();
-
-
-     User::where('id',$id)->update([
-        'role' => 'user' ]);
+    //admin change role
+    public function changerole($id)
+    {
+        $user = User::where('id', $id)->first();
+        if($user->role == "admin" ) {
+            User::where('id', $id)->update(['role' => 'user']);
         return redirect()->route('admin#list')->with(['deleteSuccess' => 'You have  change role   account ....']);
 
+        } else {
+            User::where('id', $id)->update(['role' => 'admin']);
+            return redirect()->route('adminwant#userlist')->with(['deleteSuccess' => 'You have  change role   account ....']);
 
-   }
+        }
+
+    }
 //    admin want to see useliist
-   public function userlist() {
-    $user = User::when(request('key'),function($query) {
-        $query->Where('name','like','%'.request('key').'%');
-        // ->orWhere('address','like','%'.request('key').'%');
-    })->where('role','user')->paginate(3);
-    $user->appends(request()->all());
-     return view('admin.accouts.userlist',compact('user'));
-   }
+    public function userlist()
+    {
+        $user = User::when(request('key'), function ($query) {
+            $query->Where('name', 'like', '%' . request('key') . '%');
+            // ->orWhere('address','like','%'.request('key').'%');
+        })->where('role', 'user')->paginate(3);
+        $user->appends(request()->all());
+        return view('admin.accouts.userlist', compact('user'));
+    }
 
+    //get user data for adedit
+    private function getUserdata($request)
+    {
+        return [
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'gender' => $request->gender,
+            'updated_at' => Carbon::now(),
+        ];
+    }
 
-   //get user data for adedit
-   private function getUserdata($request) {
-       return[
-         'name' => $request->name,
-         'email' => $request->email,
-         'phone' =>$request->phone,
-         'address' =>$request->address,
-         'gender' =>$request->gender,
-         'updated_at' =>Carbon::now()
-       ];
-   }
+    //validation check adcheck
+    private function accValidationCheck($request)
+    {
+        Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+            'gender' => 'required',
+        ])->validate();
 
-   //validation check adcheck
-   private function accValidationCheck($request) {
-          Validator::make($request->all(),[
-           'name' => 'required',
-           'email' => 'required',
-           'phone' => 'required',
-           'address' => 'required',
-           'gender' => 'required'
-         ])->validate();
-
-   }
+    }
     //for change password//
     private function passwordValidationCheck($request)
     {

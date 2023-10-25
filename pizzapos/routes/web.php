@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\User\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,7 +95,8 @@ Route::middleware([
 //user
     Route::group(['prefix' => 'user', 'middleware' => "user_auth"], function () {
 
-        Route::view('clientpage', 'user.home')->name('client#page');
+        // Route::view('clientpage', 'user.main.home')->name('client#page');
+        Route::get('clientpage',[UserController::class,'clientpage'])->name('client#page');
     });
 
 });

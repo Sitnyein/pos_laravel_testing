@@ -79,10 +79,10 @@
                                             @endif
                                             </td>
 
-                                            <td><i class="fa-solid fa-user"></i>{{ $a->name }}</td>
+                                            <td>  {{ $a->name }}</td>
                                             <td>{{ $a->email }}</td>
                                             <td><i class="fa-solid fa-phone ">{{ $a->phone }}</td>
-                                            <td><i class="fa-solid fa-mars-stroke-up ">{{ $a->gender }}</td>
+                                            <td>{{ $a->gender }}</td>
                                             <td><i class="fa-regular fa-address-book "></i>{{ $a->address }}</td>
 
                                             <td>

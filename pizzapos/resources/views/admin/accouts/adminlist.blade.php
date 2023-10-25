@@ -13,7 +13,7 @@
                             </div>
                         </div>
                         <div class="table-data__tool-right">
-                            <a href="{{ route('category#createpage') }}">
+                            <a href="{{route('adminwant#userlist')}}">
                                 <button class="au-btn au-btn-icon au-btn--green au-btn--small">
                                     <i class="zmdi zmdi-plus"></i>Add Admin Role
                                 </button>
@@ -100,7 +100,7 @@
                                             <td>{{ $a->email }}</td>
                                             <td><i class="fa-solid fa-phone ">{{ $a->phone }}</td>
                                             <td><i class="fa-solid fa-mars-stroke-up ">{{ $a->gender }}</td>
-                                            <td><i class="fa-regular fa-address-book "></i>{{ $a->address }}</td>
+                                            <td > {{ $a->address }}</td>
 
                                             <td>
                                                 <div class="table-data-feature">
@@ -134,8 +134,8 @@
                                 </tbody>
                             </table>
                             <div class="mt-3">
-                                {{-- {{ $admin->links() }}  --}}
-                                {{ $admin->appends(request()->query())->links() }}
+                                {{ $admin->links() }}
+                                {{-- {{ $admin->appends(request()->query())->links() }} --}}
 
                             </div>
                         </div>
