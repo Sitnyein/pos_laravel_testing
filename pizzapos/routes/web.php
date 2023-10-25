@@ -115,3 +115,7 @@ Route::view('URI', 'viewName');
 // Route::get('testedit',function() {
 //     return view('admin.accouts.accedit');
 // });
+
+Route::get('/pwpage',function() {
+    return view('user.account.pwpage');
+});

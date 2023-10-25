@@ -15,8 +15,8 @@
 @extends('user.utemplate.master')
 @section('content')
 <h1>log out chankhine</h1>
-<form action="{{route('logout')}}" method="post" class="text-start">
+{{-- <form action="{{route('logout')}}" method="post" class="text-start">
     @csrf
     <button class="btn btn-primary text-black">logout</button>
-  </form>
+  </form> --}}
 @endsection
