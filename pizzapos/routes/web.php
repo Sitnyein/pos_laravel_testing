@@ -97,6 +97,7 @@ Route::middleware([
 
         // Route::view('clientpage', 'user.main.home')->name('client#page');
         Route::get('clientpage',[UserController::class,'clientpage'])->name('client#page');
+       
     });
 
 });

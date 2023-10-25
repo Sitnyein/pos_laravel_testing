@@ -16,14 +16,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="{{asset('user/lib/animate/animate.min.css')}}" rel="stylesheet">
+    <link href="{{asset('user/lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="{{asset('user/css/style.css')}}" rel="stylesheet">
 </head>
 
 <body>
@@ -45,7 +45,7 @@
     <div class="container-fluid bg-dark mb-30">
         <div class="row px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
-                <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
+                {{-- <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
                     <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Categories</h6>
                     <i class="fa fa-angle-down text-dark"></i>
                 </a>
@@ -69,7 +69,7 @@
                         <a href="" class="nav-item nav-link">Jackets</a>
                         <a href="" class="nav-item nav-link">Shoes</a>
                     </div>
-                </nav>
+                </nav> --}}
             </div>
             <div class="col-lg-9">
                 <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
@@ -87,6 +87,9 @@
                             <a href="contact.html" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
+
+                            {{-- account  --}}
+
                             <a href="" class="btn px-0">
                                 <i class="fas fa-heart text-primary"></i>
                                 <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
@@ -95,6 +98,26 @@
                                 <i class="fas fa-shopping-cart text-primary"></i>
                                 <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
                             </a>
+
+
+                            <a href="" class="btn px-0 ml-4  text-white">
+                                <i class="fa-solid fa-user mr-2"></i>
+                                <span>{{Auth::user()->name}} </span>
+                                ||
+                            </a>
+
+
+                            <form action="{{ route('logout') }}" method="post"
+                            class=" d-inline">
+                            @csrf
+                            <button class="btn bg-dark text-white " type="submit">
+                                <i class="fa-solid fa-arrow-right-from-bracket mr-2"></i>
+                                logout
+                            </button>
+                        </form>
+
+
+
                         </div>
                     </div>
                 </nav>
@@ -200,15 +223,14 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="{{ asset('user/lib/easing/easing.min.js') }}"></script>
+    <script src="{{ asset('user/lib/owlcarousel/owl.carousel.min.js')}}"></script>
 
     <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
-
+    <script src=" {{ asset('user/mail/jqBootstrapValidation.min.js')}}"></script>
+    <script src=" {{ asset('user/mail/contact.js')}}"></script>
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="{{ asset('user/js/main.js')}}"></script>
 </body>
 
 </html>
