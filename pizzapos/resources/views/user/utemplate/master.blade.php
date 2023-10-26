@@ -21,6 +21,8 @@
     <!-- Libraries Stylesheet -->
     <link href="{{asset('user/lib/animate/animate.min.css')}}" rel="stylesheet">
     <link href="{{asset('user/lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+        {{-- bootstrap link  --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{asset('user/css/style.css')}}" rel="stylesheet">
@@ -116,6 +118,10 @@
                             </button>
                         </form>
 
+                        <a href="{{ route('pw#page') }}" >
+                            <i class="fa-solid fa-key"></i>
+                            Change password</a>
+
 
 
                         </div>
@@ -130,7 +136,6 @@
 
 
     {{-- shop-side bar  --}}
-
 
 
 
@@ -222,7 +227,9 @@
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+     {{-- bootstrap js  --}}
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    {{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script> --}}
     <script src="{{ asset('user/lib/easing/easing.min.js') }}"></script>
     <script src="{{ asset('user/lib/owlcarousel/owl.carousel.min.js')}}"></script>
 
@@ -231,6 +238,7 @@
     <script src=" {{ asset('user/mail/contact.js')}}"></script>
     <!-- Template Javascript -->
     <script src="{{ asset('user/js/main.js')}}"></script>
+
 </body>
 
 </html>

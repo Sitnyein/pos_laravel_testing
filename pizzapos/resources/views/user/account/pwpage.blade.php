@@ -97,7 +97,7 @@
                     </div>
                 @endif
                 <hr>
-                <form action="{{route('change#password')}}" method="post" novalidate="novalidate">
+                <form action="{{route('pw#change')}}" method="post" novalidate="novalidate">
                     @csrf
                     <div class="form-group">
                         <label class="control-label mb-1">Old password</label>

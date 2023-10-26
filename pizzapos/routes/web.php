@@ -97,7 +97,10 @@ Route::middleware([
 
         // Route::view('clientpage', 'user.main.home')->name('client#page');
         Route::get('clientpage',[UserController::class,'clientpage'])->name('client#page');
-       
+        Route::get('pwpage',[UserController::class,'pwpage'])->name('pw#page');
+        //real pwchage
+        Route::post('pwchange',[UserController::class,'passwordChange'])->name('pw#change');
+
     });
 
 });
