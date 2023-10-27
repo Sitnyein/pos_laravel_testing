@@ -100,6 +100,12 @@ Route::middleware([
         Route::get('pwpage',[UserController::class,'pwpage'])->name('pw#page');
         //real pwchage
         Route::post('pwchange',[UserController::class,'passwordChange'])->name('pw#change');
+        //detial user account
+        Route::get('userdetail',[UserController::class,'userdetail'])->name('user#detail');
+        //edit user account
+        Route::get('accedit',[UserController::class,'accedit'])->name('user#edit');
+        //update user account
+        Route::post('update/account/{id}',[UserController::class,'accupdate'])->name('user#update');
 
     });
 
