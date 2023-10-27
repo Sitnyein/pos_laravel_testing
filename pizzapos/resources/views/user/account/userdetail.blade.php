@@ -1,5 +1,6 @@
 @extends('user.utemplate.master')
 @section('content')
+
 <div class="col-lg-8 offset-2">
     <div class="card ">
         <div class="card-body">
@@ -12,15 +13,15 @@
             </div>
             <hr>
             <div class="row">
-                <div class="col-3 offset-2 mt-3">
+                <div class="col-3 offset-2 mt-2">
                     @if (Auth::user()->image == null)
                         @if (Auth::user()->gender == 'male')
-                            <img src="{{ asset('image/default user.png') }}" class="w-75 shadow-sm">
+                            <img src="{{ asset('image/default user.png') }}" class="w-75 shadow-sm" >
                         @else
                             <img src="{{ asset('image/girl.png') }}" class=" w-75 shadow-sm">
                         @endif
                     @else
-                        <img src="{{ asset('storage/' . Auth::user()->image) }}" class="  shadow-sm" style="width:350px">
+                        <img src="{{ asset('storage/' . Auth::user()->image) }}" class="shadow-lg" style="height:320px;width:320px;">
                     @endif
                 </div>
                 <div class=" col-4 offset-2">
@@ -30,7 +31,7 @@
                     <h4 class="my-2"> <i class="fa-solid fa-mars-stroke-up mr-2"></i>
                         {{ Auth::user()->gender }}
                     </h4>
-                    <h4 class="my-2"> <i class="fa-solid fa-at me-2"></i>
+                    <h4 class="my-2">
                         {{ Auth::user()->email }}
                     </h4>
                     <h4 class="my-2"> <i class="fa-solid fa-phone me-2"></i>
@@ -55,4 +56,5 @@
         </div>
     </div>
 </div>
+
 @endsection

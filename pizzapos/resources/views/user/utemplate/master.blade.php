@@ -87,7 +87,7 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="shop.html" class="nav-item nav-link active">Home</a>
+                            <a href="{{route('client#page')}}" class="nav-item nav-link active">Home</a>
                             <a href="cart.html" class="nav-item nav-link">My Cart</a>
                             <a href="contact.html" class="nav-item nav-link">Contact</a>
                         </div>
@@ -109,19 +109,19 @@
 
 
 
-                            <div class="image d-inline ml-5">
+                            <div class="image d-inline ml-3">
 
                                     @if (Auth::user()->image == null)
                                         @if (Auth::user()->gender == 'male')
                                             <img src="{{ asset('image/default user.png') }}"
-                                                class="shadow-sm img-thumbnail col-2 " style="width:100px;">
+                                                class="shadow-lg  "style="width: 70px;height: 70px;">
                                         @else
                                             <img src="{{ asset('image/girl.png') }}"
-                                            class="shadow-sm img-thumbnail col-2 " style="width:80px;">
+                                            class="shadow-lg " style="width: 70px;height: 70px;">
                                         @endif
                                     @else
                                         <img
-                                            src="{{ asset('storage/' . Auth::user()->image) }}"class="shadow-sm  col-2 " style="width:110px;" >
+                                            src="{{ asset('storage/' . Auth::user()->image) }}" class="shadow-sm" style="width: 70px;height: 70px;">
                                     @endif
 
                             </div>

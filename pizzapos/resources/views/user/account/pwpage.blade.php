@@ -16,14 +16,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Libraries Stylesheet -->
-    <link href="{{asset('user/lib/animate/animate.min.css')}}" rel="stylesheet">
-    <link href="{{asset('user/lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('user/lib/animate/animate.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('user/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    {{-- bootstrap link  --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{asset('user/css/style.css')}}" rel="stylesheet">
+    <link href="{{ asset('user/css/style.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -47,7 +52,7 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="shop.html" class="nav-item nav-link active">Home</a>
+                            <a href="{{ route('client#page') }}" class="nav-item nav-link active">Home</a>
                             <a href="cart.html" class="nav-item nav-link">My Cart</a>
                             <a href="contact.html" class="nav-item nav-link">Contact</a>
                         </div>
@@ -63,96 +68,92 @@
     </div>
     <!-- Navbar End -->
 
-<div class=" ml-5">
+    <div class=" ml-5">
 
-    <a href="{{route('client#page')}}" class="text-decoration-none text-black "> <i
-        class="fa-solid fa-arrow-left "></i>back</a>
-</div>
-
-  <div class="parent d-flex justify-content-center ">
-    <div class="col-lg-4  ">
-        <div class="card mt-5 shadow-lg">
-            <div class="card-body">
-                <div class="card-title">
-                    <h3 class="text-center title-2">Change Password</h3>
-                </div>
-                @if (session('success'))
-                    <!--alert message update-->
-                    <div class='col-12'>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="fa-solid fa-check"></i> {{ session('success') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                aria-label="Close"></button>
-                        </div>
-                    </div>
-                @endif
-                @if (session('notMatch'))
-                    <!--alert message old ps wrong-->
-                    <div class='col-12'>
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <i class="fa-solid fa-check"></i> {{ session('notMatch') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                aria-label="Close"></button>
-                        </div>
-                    </div>
-                @endif
-                <hr>
-                <form action="{{route('pw#change')}}" method="post" novalidate="novalidate">
-                    @csrf
-                    <div class="form-group">
-                        <label class="control-label mb-1">Old password</label>
-                        <input name="oldPassword" type="password"
-                            class="form-control @error('oldPassword') is-invalid  @enderror"
-                            aria-required="true" aria-invalid="false"
-                            placeholder="Enter old password...">
-                        @error('oldPassword')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label mb-1">New password</label>
-                        <input name="newPassword" type="password"
-                            class="form-control   @error('newPassword') is-invalid @enderror"
-                            aria-required="true" aria-invalid="false"
-                            placeholder="Enter new password...">
-
-                        @error('newPassword')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-
-
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label mb-1">Comfrim password</label>
-                        <input name="comfrimPassword" type="password"
-                            class="form-control @error('comfrimPassword') is-invalid  @enderror"
-                            aria-required="true" aria-invalid="false"
-                            placeholder="Enter confrim password...">
-                        @error('comfrimPassword')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                    <div>
-                        <button id="payment-button" type="submit"
-                            class="btn btn-lg btn-info btn-block">
-                            <span id="payment-button-amount">Change Password</span>
-                            {{-- <span id="payment-button-sending" style="display:none;">Sending…</span> --}}
-                            <i class="fa-solid fa-key"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
+        <a href="{{ route('client#page') }}" class="text-decoration-none text-black "> <i
+                class="fa-solid fa-arrow-left "></i>back</a>
     </div>
 
+    <div class="parent d-flex justify-content-center ">
+        <div class="col-lg-4  ">
+            <div class="card mt-5 shadow-lg">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h3 class="text-center title-2">Change Password</h3>
+                    </div>
+                    @if (session('success'))
+                        <!--alert message update-->
+                        <div class='col-12'>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <i class="fa-solid fa-check"></i> {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        </div>
+                    @endif
+                    @if (session('notMatch'))
+                        <!--alert message old ps wrong-->
+                        <div class='col-12'>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <i class="fa-solid fa-check"></i> {{ session('notMatch') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        </div>
+                    @endif
+                    <hr>
+                    <form action="{{ route('pw#change') }}" method="post" novalidate="novalidate">
+                        @csrf
+                        <div class="form-group">
+                            <label class="control-label mb-1">Old password</label>
+                            <input name="oldPassword" type="password"
+                                class="form-control @error('oldPassword') is-invalid  @enderror" aria-required="true"
+                                aria-invalid="false" placeholder="Enter old password...">
+                            @error('oldPassword')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label mb-1">New password</label>
+                            <input name="newPassword" type="password"
+                                class="form-control   @error('newPassword') is-invalid @enderror" aria-required="true"
+                                aria-invalid="false" placeholder="Enter new password...">
 
-  </div>
+                            @error('newPassword')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+
+
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label mb-1">Comfrim password</label>
+                            <input name="comfrimPassword" type="password"
+                                class="form-control @error('comfrimPassword') is-invalid  @enderror"
+                                aria-required="true" aria-invalid="false" placeholder="Enter confrim password...">
+                            @error('comfrimPassword')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div>
+                            <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                                <span id="payment-button-amount">Change Password</span>
+                                {{-- <span id="payment-button-sending" style="display:none;">Sending…</span> --}}
+                                <i class="fa-solid fa-key"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
 
 
     <!-- Footer Start -->
@@ -160,7 +161,8 @@
         <div class="row px-xl-5 pt-5">
             <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                 <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
-                <p class="mb-4">No dolore ipsum accusam no lorem. Invidunt sed clita kasd clita et et dolor sed dolor. Rebum tempor no vero est magna amet no</p>
+                <p class="mb-4">No dolore ipsum accusam no lorem. Invidunt sed clita kasd clita et et dolor sed
+                    dolor. Rebum tempor no vero est magna amet no</p>
                 <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
                 <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
                 <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
@@ -170,23 +172,35 @@
                     <div class="col-md-4 mb-5">
                         <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
                         <div class="d-flex flex-column justify-content-start">
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-                            <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                            <a class="text-secondary mb-2" href="#"><i
+                                    class="fa fa-angle-right mr-2"></i>Home</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our
+                                Shop</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop
+                                Detail</a>
+                            <a class="text-secondary mb-2" href="#"><i
+                                    class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                            <a class="text-secondary mb-2" href="#"><i
+                                    class="fa fa-angle-right mr-2"></i>Checkout</a>
+                            <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact
+                                Us</a>
                         </div>
                     </div>
                     <div class="col-md-4 mb-5">
                         <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
                         <div class="d-flex flex-column justify-content-start">
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-                            <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                            <a class="text-secondary mb-2" href="#"><i
+                                    class="fa fa-angle-right mr-2"></i>Home</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our
+                                Shop</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop
+                                Detail</a>
+                            <a class="text-secondary mb-2" href="#"><i
+                                    class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                            <a class="text-secondary mb-2" href="#"><i
+                                    class="fa fa-angle-right mr-2"></i>Checkout</a>
+                            <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact
+                                Us</a>
                         </div>
                     </div>
                     <div class="col-md-4 mb-5">
@@ -202,9 +216,12 @@
                         </form>
                         <h6 class="text-secondary text-uppercase mt-4 mb-3">Follow Us</h6>
                         <div class="d-flex">
-                            <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-primary btn-square mr-2" href="#"><i
+                                    class="fab fa-twitter"></i></a>
+                            <a class="btn btn-primary btn-square mr-2" href="#"><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-primary btn-square mr-2" href="#"><i
+                                    class="fab fa-linkedin-in"></i></a>
                             <a class="btn btn-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
@@ -220,7 +237,7 @@
                 </p>
             </div>
             <div class="col-md-6 px-xl-0 text-center text-md-right">
-                <img class="img-fluid" src="{{asset('user/img/payments.png')}}" alt="">
+                <img class="img-fluid" src="{{ asset('user/img/payments.png') }}" alt="">
             </div>
         </div>
     </div>
@@ -235,13 +252,16 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('user/lib/easing/easing.min.js') }}"></script>
-    <script src="{{ asset('user/lib/owlcarousel/owl.carousel.min.js')}}"></script>
-
+    <script src="{{ asset('user/lib/owlcarousel/owl.carousel.min.js') }}"></script>
+    {{-- bootstrap js  --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
     <!-- Contact Javascript File -->
-    <script src=" {{ asset('user/mail/jqBootstrapValidation.min.js')}}"></script>
-    <script src=" {{ asset('user/mail/contact.js')}}"></script>
+    <script src=" {{ asset('user/mail/jqBootstrapValidation.min.js') }}"></script>
+    <script src=" {{ asset('user/mail/contact.js') }}"></script>
     <!-- Template Javascript -->
-    <script src="{{ asset('user/js/main.js')}}"></script>
+    <script src="{{ asset('user/js/main.js') }}"></script>
 </body>
 
 </html>
