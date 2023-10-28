@@ -87,6 +87,7 @@ Route::middleware([
            Route::get('moredetail/{id}',[ProductController::class,'moreinfo'])->name('pizza#detail');
            //edit page
            Route::get('edit/{id}',[ProductController::class,'edit'])->name('pizza#edit');
+           Route::post('update/{id}',[ProductController::class,'update'])->name('pizza#update');
 
         });
 

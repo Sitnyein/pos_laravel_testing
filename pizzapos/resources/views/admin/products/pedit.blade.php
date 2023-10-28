@@ -21,7 +21,7 @@
 
                                     <hr>
                                     {{-- form  --}}
-                                    <form action="" method="POST" enctype="multipart/form-data">
+                                    <form action="{{route('pizza#update',$product->id)}}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
                                             <div class="col-4 offset-1">
@@ -66,6 +66,21 @@
                                                         </div>
                                                     @enderror
                                                 </div>
+                                                <div class="form-group">
+                                                    <label class="control-label mb-1">Category</label>
+                                                    <select name="categoryId" class=" form-control @error('categoryId') is-invalid  @enderror">
+                                                    <option value="" disabled >Choose One Category</option>
+                                                        @foreach ($category as $c )
+                                                     <option value="{{$c->id}}" @if($product->category_id == $c->id) selected @endif>{{$c->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('categoryId')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+
 
                                                 <div class="form-group">
                                                     <label class="control-label mb-1">Price</label>
@@ -91,26 +106,26 @@
                                                     @enderror
                                                 </div>
 
+
                                                 <div class="form-group">
                                                     <label class="control-label mb-1">Watched person</label>
-                                                    <input name="view" value="{{$product->view_count}}"
-                                                        type="text" class="form-control" aria-required="true"
-                                                        aria-invalid="false" disabled>
+                                                    <input type="number" name="view"  value="{{$product->view_count}}"
+                                                         class="form-control"  disabled>
                                                 </div>
-                                              
-                                            
-                                            
-                                        
-                                            
+
+
+
+
+
 
 
                                             </div>
                                         </div>
                                     </form>
-                    
 
-                
-                
+
+
+
 
                                 </div>
                             </div>
