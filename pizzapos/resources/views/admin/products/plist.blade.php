@@ -96,7 +96,7 @@
                                                 <img style="height: 100px; width:100px"
                                                     src="{{ asset('storage/' . $item->image) }}" alt="">
                                             </td>
-                                            <td>{{ $item->category_id }}</td>
+                                            <td class="text-white">{{ $item->category_name }}</td>
                                             <td>{{ $item->name }}</td>
                                             <td class="col-1">{{ $item->waiting_time . ' min' }}</td>
                                             <td>{{ $item->price . 'kyats' }} </td>
@@ -129,8 +129,8 @@
                                 </tbody>
                             </table>
                             <div class="mt-3">
-                                {{ $products->appends(request()->query())->links() }}
-                                {{-- {{ $categories->links() }} --}}
+                                {{-- {{ $products->appends(request()->query())->links() }} --}}
+                                {{ $products->links() }}
                             </div>
                         </div>
                     @else

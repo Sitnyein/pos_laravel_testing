@@ -13,18 +13,16 @@ class ProductController extends Controller
 { //read
     public function productlist()
     {
-        $products = Product::when(request('key'), function ($query) {
+        $products = Product::select('products.*','categories.name as cateogry_name')
+        ->when(request('key'), function ($query) {
             $query->where('name', 'like', '%' . request('key') . '%');
         })
-            ->orderBy('id', 'desc')->paginate(3);
+            ->leftJoin('categories','products.category_id','categories.id')
+            ->orderBy('products.id', 'desc')->paginate(3);
+            $products->appends(request()->all());
+          ;
         return view('admin.products.plist', compact('products'));
     }
-    /*  $categories =Category::when(request('key'),function($query){
-    $query->where('name','like','%'.request('key') .'%');
-    })
-    ->orderBy('id','desc')->paginate(4);
-    $categories->appends(request()->all());
-    return view('admin.category.list',compact('categories'));*/
 
     //create page
     public function pizzapage()
