@@ -36,7 +36,7 @@ class ProductController extends Controller
     //only create
     public function pizzacreate(Request $req)
     {
-        $this->pizzaValidationCheck($req);
+        $this->pizzaValidationCheck($req,"create");
         $data = $this->createproduct($req);
         $fileName = uniqid() . $req->file('image')->getClientOriginalName();
         $req->file('image')->storeAs('public', $fileName); //db public save
@@ -73,11 +73,29 @@ class ProductController extends Controller
         return view('admin.products.pedit',compact('product','category'));
     }
 
-    //update
+    //update pizza
     public function update($id,Request $req) {
-        dd($req->toArray());
+
+
+        $this->pizzaValidationCheck($req,"update");
+        $data = $this->createproduct($req);
+        if ($request->hasFile('image')) {
+            $dbimage = Product::where('id', $id)->first();
+            $dbimage = $dbimage->image;
+            if ($dbimage != null) {
+                Storage::delete(['public/', $dbimage]);
+            }
+            $fileName = uniqid() . $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('public', $fileName); //db public save
+            $data['image'] = $fileName;
+        }
+
+        Product::where('id', $id)->update($data);
+        return redirect()->route('product#list')->with(['updateSuccess' => 'Product update success....']);
+
+
     }
-    //createpizza
+    //createpizza && update pizza
     private function createproduct($request)
     {
         return [
@@ -89,45 +107,23 @@ class ProductController extends Controller
             'created_at' => Carbon::now(),
         ];
     }
-    //validation check adcheck
-    private function pizzaValidationCheck($request)
+    //validation check adcheck for create && update
+    private function pizzaValidationCheck($request,$action)
     {
-        Validator::make($request->all(), [
-            'name' => 'required|min:5|unique:products,name,',
-            'categoryId' => 'required',
-            'time' => 'required',
-            'description' => 'required|min:5',
-            'price' => 'required',
-            'image' => 'required|mimes:jpg,bmp.png|file',
-        ])->validate();
+        $validationrules = [
+
+                'name' => 'required|min:5|unique:products,name,'.$request->pizzaid,
+                'categoryId' => 'required',
+                'time' => 'required',
+                'description' => 'required|min:5',
+                'price' => 'required',
+
+        ];
+        $validationrules['image'] = $action == "create" ? 'required|mimes:jpg,bmp.png|file' : 'mimes:jpg,bmp.png|file' ;
+        Validator::make($request->all(), $validationrules  )->validate();
 
     }
 
 }
 
-/*validation  other
 
-$validation = [
-'postTitle' => 'required|min:5|unique:customers,title,' . $request->postId,
-'PostD' => 'required|min:4,',
-'postimage' => 'mimes:jpg,bmp.png|file',
-// 'postFee'=>'required',
-// 'postAddress'=>'required',
-// 'postrate'=>'required',
-
-];
-$validationmessage = [
-'postTitle.required' => 'You need to fill Post title',
-'postTitle.min' => 'you must be write more than five letters ',
-'postTitle.unique' => 'Title is already taken,Try another name',
-'PostD.required' => 'You need to fill Post description',
-// 'postFee.required'=>'You need to write fee',
-// 'postAddress.required'=>'location access is need',
-// 'postrate.required'=>'Plz give me comment',
-'postimage.mimes' => 'it must be image only accept',
-
-];
-
-Validator::make($request->all(), $validation, $validationmessage)->validate();
-
- */

@@ -99,8 +99,8 @@
                                             <td>{{ $item->category_id }}</td>
                                             <td>{{ $item->name }}</td>
                                             <td class="col-1">{{ $item->waiting_time . ' min' }}</td>
-                                            <td>{{ $item->price }}</td>
-                                            <td>{{ $item->view_count }}</td>
+                                            <td>{{ $item->price . 'kyats' }} </td>
+                                            <td>{{ $item->view_count .' person' }}</td>
                                             {{-- <td>{{ $item->created_at->format('j-F-Y') }}</td>  --}}
                                             <td>
                                                 <div class="table-data-feature">

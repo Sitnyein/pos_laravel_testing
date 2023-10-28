@@ -41,6 +41,8 @@
                                                 </div>
                                             </div>
 
+                                            <input type="hidden" name="pizzaid" value="{{$product->id}}">
+
                                             <div class="  col-4 offset-1">
                                                 <div class="form-group">
                                                     <label class="control-label mb-1">Name</label>
