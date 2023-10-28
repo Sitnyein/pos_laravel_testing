@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use validation;
 use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -91,6 +92,7 @@ class UserController extends Controller
           'phone' => 'required',
           'address' => 'required',
           'gender' => 'required',
+          'image' => 'mimes:jpg,bmp.png|file'
       ])->validate();
 
   }

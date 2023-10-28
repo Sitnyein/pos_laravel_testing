@@ -103,8 +103,13 @@
                                 <img src="{{ asset('storage/' . Auth::user()->image) }}" class="  shadow-sm" style="height:320px;width:320px;" />
                             @endif
                             <div class=" mt-3">
-                                <input type="file" name="image" id=""
-                                    class="form-control">
+                                <input type="file" name="image"
+                                    class="form-control @error('image') is-invalid    @enderror"  aria-required="true" aria-invalid="false">
+                                    @error('image')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                             <div class=" mt-3">
                                 <button class="btn btn-dark text-white submit col-12">

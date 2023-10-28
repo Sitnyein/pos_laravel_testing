@@ -24,8 +24,8 @@
 
                                         </div>
                                         <div class="col-5 offset-1">
-                                            <h4 class="my-2"> <i class="fa-solid fa-user-shield"></i>
-                                                {{ $item->category_id }}
+                                            <h4 class="my-2"> <i class="fa-solid fa-pizza-slice"></i>
+                                                {{ $item->category_name }}
                                             </h4>
                                             <h4 class="my-2"> Price ::
                                                 {{ $item->price }} kyats

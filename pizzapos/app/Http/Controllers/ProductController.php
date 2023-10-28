@@ -13,7 +13,7 @@ class ProductController extends Controller
 { //read
     public function productlist()
     {
-        $products = Product::select('products.*','categories.name as cateogry_name')
+        $products = Product::select('products.*','categories.name as category_name')
         ->when(request('key'), function ($query) {
             $query->where('name', 'like', '%' . request('key') . '%');
         })
@@ -21,6 +21,7 @@ class ProductController extends Controller
             ->orderBy('products.id', 'desc')->paginate(3);
             $products->appends(request()->all());
           ;
+
         return view('admin.products.plist', compact('products'));
     }
 
@@ -46,7 +47,9 @@ class ProductController extends Controller
 
     // detail product page
      public function moreinfo($id) {
-        $item = Product::where('id',$id)->first();
+        $item = Product::select('products.*','categories.name as category_name')
+        ->leftJoin('categories','products.category_id','categories.id')
+        ->where('products.id',$id)->first();
         return view('admin.products.pdetail',compact('item'));
      }
 
@@ -77,14 +80,14 @@ class ProductController extends Controller
 
         $this->pizzaValidationCheck($req,"update");
         $data = $this->createproduct($req);
-        if ($request->hasFile('image')) {
+        if ($req->hasFile('image')) {
             $dbimage = Product::where('id', $id)->first();
             $dbimage = $dbimage->image;
             if ($dbimage != null) {
                 Storage::delete(['public/', $dbimage]);
             }
-            $fileName = uniqid() . $request->file('image')->getClientOriginalName();
-            $request->file('image')->storeAs('public', $fileName); //db public save
+            $fileName = uniqid() . $req->file('image')->getClientOriginalName();
+            $req->file('image')->storeAs('public', $fileName); //db public save
             $data['image'] = $fileName;
         }
 
