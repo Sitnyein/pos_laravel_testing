@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use validation;
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,8 @@ class UserController extends Controller
 {
     //
     public function clientpage() {
-        return view('user.main.home');
+        $product = Product::orderBy('products.id', 'desc')->paginate(5);
+        return view('user.main.home',compact('product'));
     }
     //pw page
     public function pwpage() {

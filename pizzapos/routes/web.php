@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
@@ -108,7 +109,36 @@ Route::middleware([
         //update user account
         Route::post('update/account/{id}',[UserController::class,'accupdate'])->name('user#update');
 
+        //this is ajax
+        Route::get('ajax',[AjaxController::class,'javascriptcase'])->name('user#ajax');
+
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 });
 
@@ -127,6 +157,3 @@ Route::view('URI', 'viewName');
 //     return view('admin.accouts.accedit');
 // });
 
-Route::get('/pwpage',function() {
-    return view('user.account.pwpage');
-});
