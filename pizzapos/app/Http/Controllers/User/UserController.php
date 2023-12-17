@@ -6,6 +6,7 @@ use validation;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -18,8 +19,16 @@ class UserController extends Controller
     //
     public function clientpage() {
         $product = Product::orderBy('products.id', 'desc')->paginate(5);
-        return view('user.main.home',compact('product'));
+        $category = Category::get();
+        return view('user.main.home',compact('product','category'));
     }
+    //filter by category
+    public function filter($id) {
+        $product = Product::where('category_id',$id)->orderBy('products.id', 'desc')->paginate(5);
+        $category = Category::get();
+        return view('user.main.home',compact('product','category'));
+    }
+
     //pw page
     public function pwpage() {
         return view('user.account.pwpage');
@@ -71,6 +80,14 @@ class UserController extends Controller
         return redirect()->route('client#page');
    }
 
+
+   //pizza detail
+   public function pizadetail($pizaid) {
+    $pizaid = Product::where('id',$pizaid)->first();
+    $products = Product::get();
+    // dd($pizaid->toArray());
+    return view('user.main.detail',compact('pizaid','products'));
+   }
 
    private function getUserdata($request)
    {

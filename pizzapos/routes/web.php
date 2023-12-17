@@ -99,6 +99,8 @@ Route::middleware([
 
         // Route::view('clientpage', 'user.main.home')->name('client#page');
         Route::get('clientpage',[UserController::class,'clientpage'])->name('client#page');
+        //filter by category
+        Route::get('filter/{id}',[UserController::class,'filter'])->name('user#filter');
         Route::get('pwpage',[UserController::class,'pwpage'])->name('pw#page');
         //real pwchage
         Route::post('pwchange',[UserController::class,'passwordChange'])->name('pw#change');
@@ -111,6 +113,8 @@ Route::middleware([
 
         //this is ajax
         Route::get('ajax',[AjaxController::class,'javascriptcase'])->name('user#ajax');
+        // this is pizza detail
+        Route::get('pizza/detail/{id}',[UserController::class,'pizadetail'])->name('piza#detail');
 
     });
 
@@ -157,3 +161,6 @@ Route::view('URI', 'viewName');
 //     return view('admin.accouts.accedit');
 // });
 
+Route::get('testing',function() {
+    return view('user.main.detail');
+});

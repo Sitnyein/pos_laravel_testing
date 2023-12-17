@@ -6,40 +6,23 @@
             <!-- Shop Sidebar Start -->
             <div class="col-lg-3 col-md-4">
                 <!-- Price Start -->
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by
-                        price</span></h5>
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter By Category</span></h5>
                 <div class="bg-light p-4 mb-30">
                     <form>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" checked id="price-all">
-                            <label class="custom-control-label" for="price-all">All Price</label>
-                            <span class="badge border font-weight-normal">1000</span>
+                        <div class=" d-flex align-items-center justify-content-between mb-3 bg-dark text-white px-3 py-1">
+                            <label class="mt-2"  for="">Categories</label>
+                            <span class=" badge border font-weight-normal">{{ count($category)}}</span>
                         </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-1">
-                            <label class="custom-control-label" for="price-1">$0 - $100</label>
-                            <span class="badge border font-weight-normal">150</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-2">
-                            <label class="custom-control-label" for="price-2">$100 - $200</label>
-                            <span class="badge border font-weight-normal">295</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-3">
-                            <label class="custom-control-label" for="price-3">$200 - $300</label>
-                            <span class="badge border font-weight-normal">246</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-4">
-                            <label class="custom-control-label" for="price-4">$300 - $400</label>
-                            <span class="badge border font-weight-normal">145</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                            <input type="checkbox" class="custom-control-input" id="price-5">
-                            <label class="custom-control-label" for="price-5">$400 - $500</label>
-                            <span class="badge border font-weight-normal">168</span>
-                        </div>
+                        <a href=" {{route('client#page') }}" class="text-dark">
+                            <label for="price-1">ALL</label>
+                        </a>
+                        @foreach ($category as $c)
+                         <div class=" d-flex align-items-center justify-content-between mb-3 pt-1">
+                            <a href=" {{route('user#filter', $c->id ) }}" class="text-dark">
+                                <label for="price-1">{{$c->name}}</label>
+                            </a>
+                         </div>
+                        @endforeach
                     </form>
                 </div>
                 <!-- Price End -->
@@ -73,28 +56,33 @@
 
                     {{-- control ajax javascript  --}}
                    <span class="row" id="homejs">
-                    @foreach ($product as $p)
-                    <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
-                        <div class="product-item bg-light mb-4">
-                            <div class="product-img position-relative overflow-hidden">
-                                <img class="img-fluid w-100" style="height: 250px"
-                                    src="{{ asset('storage/' . $p->image) }}" alt="">
-                                 <div class="product-action">
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                   @if(count($product) != 0)
+                   @foreach ($product as $p)
+                   <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                       <div class="product-item bg-light mb-4">
+                           <div class="product-img position-relative overflow-hidden">
+                               <img class="img-fluid w-100 h-50"
+                                   src="{{ asset('storage/' . $p->image) }}" alt="">
+                                <div class="product-action">
+                                   <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                   <a class="btn btn-outline-dark btn-square" href="{{route('piza#detail',$p->id)}}"><i class="fa-solid fa-circle-info"></i>                                   </a>
+                                   <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
 
-                                </div>
-                            </div>
-                            <div class="text-center py-4">
-                                <a class="h6 text-decoration-none text-truncate" href="">{{ $p->name }}</a>
-                                <div class="d-flex align-items-center justify-content-center mt-2">
-                                    <h5>{{ $p->price }} mmk</h5>
-                                </div>
+                               </div>
+                           </div>
+                           <div class="text-center py-4">
+                               <a class="h6 text-decoration-none text-truncate" href="">{{ $p->name }}</a>
+                               <div class="d-flex align-items-center justify-content-center mt-2">
+                                   <h5>{{ $p->price }} mmk</h5>
+                               </div>
 
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+                           </div>
+                       </div>
+                   </div>
+               @endforeach
+                   @else
+                   <h3 class="text-danger text-center shadow-sm    py-3">There is no piza <i class="fa-solid fa-pizza-slice"></i></h3>
+                   @endif
 
                    </span>
                 </div>
