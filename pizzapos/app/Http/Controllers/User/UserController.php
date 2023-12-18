@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use validation;
 use Carbon\Carbon;
+use App\Models\Cart;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
@@ -16,11 +17,12 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    //
+    //user home page
     public function clientpage() {
         $product = Product::orderBy('products.id', 'desc')->paginate(5);
+        $cart = Cart::where('user_id',Auth::user()->id)->get();
         $category = Category::get();
-        return view('user.main.home',compact('product','category'));
+        return view('user.main.home',compact('product','category','cart'));
     }
     //filter by category
     public function filter($id) {
@@ -87,6 +89,15 @@ class UserController extends Controller
     $products = Product::get();
     // dd($pizaid->toArray());
     return view('user.main.detail',compact('pizaid','products'));
+   }
+
+   // user cartlist
+   public function cartlist() {
+    $cartlist = Cart::select('carts.*','products.name as piza_name','products.price as piza_price','products.image as piza_image')
+        ->leftJoin('products','products.id','carts.product_id')
+    ->where('carts.user_id',Auth::user()->id)->get();
+    // dd($cartlist->toArray());
+    return view('user.main.cartlist',compact('cartlist'));
    }
 
    private function getUserdata($request)
