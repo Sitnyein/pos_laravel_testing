@@ -111,10 +111,11 @@ Route::middleware([
         //update user account
         Route::post('update/account/{id}',[UserController::class,'accupdate'])->name('user#update');
 
-        //this is ajax
-        Route::get('ajax',[AjaxController::class,'javascriptcase'])->name('user#ajax');
         // this is pizza detail
         Route::get('pizza/detail/{id}',[UserController::class,'pizadetail'])->name('piza#detail');
+        //this is ajax
+        Route::get('ajax',[AjaxController::class,'javascriptcase'])->name('user#ajax');
+        Route::get('ajax/cart',[AjaxController::class,'addcart'])->name('add#cart');
 
     });
 

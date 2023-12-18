@@ -26,6 +26,8 @@
             <div class="col-lg-7 h-auto mb-30">
                 <div class="h-100 bg-light p-30">
                     <h3 class=" text-uppercase">{{$pizaid->name}}</h3>
+                    <input type="text" id="userid" value="{{Auth::user()->id}}">
+                    <input type="text" id="orderid" value="{{$pizaid->id}}">
                     <div class="d-flex mb-3">
                         <div class="text-primary mr-2">
                             <small class="fas fa-star"></small>
@@ -45,15 +47,14 @@
                                     <i class="fa fa-minus"></i>
                                 </button>
                             </div>
-                            <input type="text" class="form-control bg-secondary border-0 text-center" value="1">
+                            <input type="text" class="form-control bg-secondary border-0 text-center" id="ordercount" value="1">
                             <div class="input-group-btn">
                                 <button class="btn btn-primary btn-plus">
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </div>
                         </div>
-                        <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
-                            Cart</button>
+                        <button type="button" id="addtoCart" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
                     </div>
                     <div class="d-flex pt-2">
                         <strong class="text-dark mr-2">Share on:</strong>
@@ -92,9 +93,8 @@
                             <img class="img-fluid w-100" src="{{ asset('storage/' . $p->image) }}" alt="">
                             <div class="product-action">
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href="{{route('piza#detail',$p->id)}}"><i class="fa-solid fa-circle-info"></i>                                   </a>
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
                             </div>
                         </div>
                         <div class="text-center py-4">
@@ -131,3 +131,33 @@
 @endsection
 
 
+
+@section('scriptSource')
+    <script>
+        $(document).ready(function() {
+
+            $('#addtoCart').click(function() {
+             $source = {
+                'userid' :$('#userid').val(),
+                'pizzaid':$('#orderid').val(),
+                'count' :$('#ordercount').val()
+             }
+
+
+             $.ajax({
+                      type: 'get',
+                        url: 'http://localhost:8000/user/ajax/cart',
+                        data: $source,
+                        dataType: 'json',
+                        success: function(response) {
+                            console.log(response);
+                         if(response.status == 'success') {
+                            window.location.href = "http://localhost:8000/user/clientpage";
+                         }
+                        }
+                    })
+
+            })
+        })
+    </script>
+@endsection
