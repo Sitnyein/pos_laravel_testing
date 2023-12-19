@@ -36,24 +36,25 @@
                     <tbody class="align-middle">
                         @foreach ($cartlist as $c )
                         <tr>
+                            <input type="hidden" value="{{$c->piza_price}}" id="pizaprice">
                             <td class="align-middle"><img src="{{ asset('storage/' . $c->piza_image) }}" alt="" style="width: 50px;"> {{$c->piza_name}} </td>
                             <td class="align-middle">{{$c->piza_price}}</td>
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
                                     <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" >
+                                        <button class="btn btn-sm btn-primary btn-minus" id="minus" >
                                         <i class="fa fa-minus"></i>
                                         </button>
                                     </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
+                                    <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="{{$c->qty}}" id="qty">
                                     <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
+                                        <button class="btn btn-sm btn-primary btn-plus" id="plus">
                                             <i class="fa fa-plus"></i>
                                         </button>
                                     </div>
                                 </div>
                             </td>
-                            <td class="align-middle">$150</td>
+                            <td class="align-middle" id="totalprice">{{$c->piza_price * $c->qty}} mmk</td>
                             <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
                         </tr>
 
@@ -92,3 +93,36 @@
 
 
 @endsection
+
+
+
+
+@section('scriptSource')
+    <script>
+        $(document).ready(function() {
+
+           $('.btn-plus').click(function() {
+           $parentNode = $(this).parents("tr");
+           $price = $parentNode.find("#pizaprice").val() ;
+           $qty = $parentNode.find("#qty").val();
+
+           $parentNode.find('#totalprice').html($price * ($qty*1) + " mmk");
+
+
+
+           })
+
+           $('.btn-minus').click(function() {
+            $parentNode = $(this).parents("tr");
+           $price = $parentNode.find("#pizaprice").val();
+           $qty = $parentNode.find("#qty").val();
+
+           $parentNode.find('#totalprice').html($price * ($qty*1) + " mmk");
+
+
+
+           })
+        })
+    </script>
+@endsection
+
