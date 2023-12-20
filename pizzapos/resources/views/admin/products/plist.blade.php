@@ -93,7 +93,7 @@
                                     @foreach ($products as $item)
                                         <tr class="tr-shadow   ">
                                             <td class="col-2">
-                                                <img style="height: 100px; width:100px"
+                                                <img 
                                                     src="{{ asset('storage/' . $item->image) }}" alt="">
                                             </td>
                                             <td class="text-white">{{ $item->category_name }}</td>

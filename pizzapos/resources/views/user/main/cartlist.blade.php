@@ -70,17 +70,17 @@
                     <div class="border-bottom pb-2">
                         <div class="d-flex justify-content-between mb-3">
                             <h6 >Subtotal</h6>
-                            <h6 id="subtotal" class="subtotal">$150</h6>
+                            <h6 id="subtotal" class="subtotal">$$$$</h6>
                         </div>
                         <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-medium">Shipping</h6>
+                            <h6 class="font-weight-medium">Tax</h6>
                             <h6 class="font-weight-medium">3000mmk</h6>
                         </div>
                     </div>
                     <div class="pt-2">
                         <div class="d-flex justify-content-between mt-2">
                             <h5>Total</h5>
-                            <h5 id="finalprice">$160</h5>
+                            <h5 id="finalprice">$$$$</h5>
                         </div>
                         <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
                     </div>
@@ -102,7 +102,7 @@
     <script>
         $(document).ready(function() {
 
-            // $("#subname").trigger( );
+            $("#subname").trigger(summary() );
 
 
 
@@ -110,37 +110,27 @@
            $parentNode = $(this).parents("tr");
            $price = $parentNode.find("#price").text().replace("mmk","") * 1 ;
            $qty = $parentNode.find("#qty").val();
-
            $parentNode.find('#totalprice').html($price * ($qty*1) + " mmk");
-             $pricetotal = 0;
-           $('#datatable tr').each(function(index,row) {
-               $pricetotal += Number($(row).find('#totalprice').text().replace("mmk",""));
-
-
-           })
-
-          $('#subtotal').html($pricetotal + " mmk");
-          $('#finalprice').html($pricetotal + 3000 * 1 +  " mmk")
-
-
-
+           summary();
            })
 
            $('.btn-minus').click(function() {
             $parentNode = $(this).parents("tr");
             $price = $parentNode.find("#price").text().replace("mmk","") * 1 ;
            $qty = $parentNode.find("#qty").val();
-
            $parentNode.find('#totalprice').html($price * ($qty*1) + " mmk");
-
-
-           $reducetotal = 0;
-           $('#datatable tr').each(function(index,row) {
-               $reducetotal += Number($(row).find('#totalprice').text().replace("mmk",""));
-           })
-           $('#subtotal').html($reducetotal + " mmk");
-
+            summary();
         })
+
+        function summary() {
+             $pricetotal = 0;
+           $('#datatable tr').each(function(index,row) {
+               $pricetotal += Number($(row).find('#totalprice').text().replace("mmk",""));
+           })
+
+          $('#subtotal').html($pricetotal + " mmk");
+          $('#finalprice').html($pricetotal + 3000 * 1 +  " mmk")
+        }
 
     })
     </script>
