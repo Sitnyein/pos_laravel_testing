@@ -28,7 +28,8 @@ class UserController extends Controller
     public function filter($id) {
         $product = Product::where('category_id',$id)->orderBy('products.id', 'desc')->paginate(5);
         $category = Category::get();
-        return view('user.main.home',compact('product','category'));
+        $cart = Cart::where('user_id',Auth::user()->id)->get();
+        return view('user.main.home',compact('product','category','cart'));
     }
 
     //pw page

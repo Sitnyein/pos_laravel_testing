@@ -26,8 +26,8 @@
             <div class="col-lg-7 h-auto mb-30">
                 <div class="h-100 bg-light p-30">
                     <h3 class=" text-uppercase">{{$pizaid->name}}</h3>
-                    <input type="text" id="userid" value="{{Auth::user()->id}}">
-                    <input type="text" id="orderid" value="{{$pizaid->id}}">
+                    <input type="hidden" id="userid" value="{{Auth::user()->id}}">
+                    <input type="hidden" id="orderid" value="{{$pizaid->id}}">
                     <div class="d-flex mb-3">
                         <div class="text-primary mr-2">
                             <small class="fas fa-star"></small>
@@ -137,11 +137,13 @@
         $(document).ready(function() {
 
             $('#addtoCart').click(function() {
+
              $source = {
                 'userid' :$('#userid').val(),
                 'pizzaid':$('#orderid').val(),
                 'count' :$('#ordercount').val()
              }
+            //  console.log($source);
 
 
              $.ajax({

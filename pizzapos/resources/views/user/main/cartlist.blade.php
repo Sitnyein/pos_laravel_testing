@@ -1,15 +1,11 @@
 @extends('user.utemplate.master')
 @section('content')
-
-
-
-
     <!-- Breadcrumb Start -->
     <div class="container-fluid">
         <div class="row px-xl-5">
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark" href="{{route('client#page')}}">Home</a>
+                    <a class="breadcrumb-item text-dark" href="{{ route('client#page') }}">Home</a>
 
                 </nav>
             </div>
@@ -26,6 +22,7 @@
                     <thead class="thead-dark">
                         <tr>
                             <th>Products</th>
+                            <th>Name</th>
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Total</th>
@@ -33,43 +30,50 @@
                         </tr>
                     </thead>
                     <tbody class="align-middle">
-                        @foreach ($cartlist as $c )
-                        <tr>
-                            {{-- <input type="hidden" value="{{$c->piza_price}}" id="pizaprice"> --}}
-                            <td class="align-middle"><img src="{{ asset('storage/' . $c->piza_image) }}" alt="" style="width: 50px;"> {{$c->piza_name}} </td>
-                            <td class="align-middle" id="price">{{$c->piza_price}}</td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" id="minus" >
-                                        <i class="fa fa-minus"></i>
-                                        </button>
+                        @foreach ($cartlist as $c)
+                            <tr>
+                                <input type="hidden" id="userid" value="{{Auth::user()->id}}">
+                                <input type="hidden" id="productid" value="{{$c->product_id}}">
+
+                                {{-- <input type="hidden" value="{{$c->piza_price}}" id="pizaprice"> --}}
+                                <td class="col-2"><img src="{{ asset('storage/' . $c->piza_image) }}" alt=""
+                                        style="width: 70%"> </td>
+                                <td class="align-middle">{{ $c->piza_name }}</td>
+                                <td class="align-middle" id="price">{{ $c->piza_price }}</td>
+                                <td class="align-middle">
+                                    <div class="input-group quantity mx-auto" style="width: 100px;">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-sm btn-primary btn-minus" id="minus">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                        </div>
+                                        <input type="text"
+                                            class="form-control form-control-sm bg-secondary border-0 text-center"
+                                            value="{{ $c->qty }}" id="qty">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-sm btn-primary btn-plus" id="plus">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="{{$c->qty}}" id="qty">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus" id="plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle" id="totalprice">{{$c->piza_price * $c->qty}} mmk</td>
+                                </td>
+                                <td class="align-middle" id="totalprice">{{ $c->piza_price * $c->qty }} mmk</td>
 
-                            <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
-                        </tr>
-
-
+                                <td class="align-middle"><button class="btn btn-sm btn-danger"><i
+                                            class="fa fa-times"></i></button></td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
 
             </div>
             <div class="col-lg-4">
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart Summary</span></h5>
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart
+                        Summary</span></h5>
                 <div class="bg-light p-30 mb-5">
                     <div class="border-bottom pb-2">
                         <div class="d-flex justify-content-between mb-3">
-                            <h6 >Subtotal</h6>
+                            <h6>Subtotal</h6>
                             <h6 id="subtotal" class="subtotal">$$$$</h6>
                         </div>
                         <div class="d-flex justify-content-between">
@@ -82,57 +86,53 @@
                             <h5>Total</h5>
                             <h5 id="finalprice">$$$$</h5>
                         </div>
-                        <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
+                        <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" id="orderbtn">Proceed To
+                            Checkout</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Cart End -->
-
-
-
-
 @endsection
 
 
 
 
 @section('scriptSource')
+    <script src={{ asset('js/cart.js') }}></script>
+
     <script>
         $(document).ready(function() {
+            $('#orderbtn').click(function() {
+               $orderlist=[];
+               $random = Math.floor(Math.random() * 1000000001);
+               $('#datatable tbody tr').each(function(index,row) {
+                $orderlist.push({
+                    'userid' : $(row).find('#userid').val(),
+                    'productid' : $(row).find('#productid').val(),
+                    'qty' : $(row).find('#qty').val(),
+                    'total' :$(row).find('#totalprice').text().replace("mmk","") * 1 ,
+                    'ordercode' : $random
+                });
+               });
 
-            $("#subname").trigger(summary() );
+               $.ajax({
+                      type: 'get',
+                        url: 'http://localhost:8000/user/ajax/order',
+                        data: Object.assign({},$orderlist),
+                        dataType: 'json',
+                        success: function(response) {
+                            console.log(response);
+                        //  if(response.status == 'success') {
+                        //     window.location.href = "http://localhost:8000/user/clientpage";
+                        //  }
+                        }
+                    })
 
 
 
-           $('.btn-plus').click(function() {
-           $parentNode = $(this).parents("tr");
-           $price = $parentNode.find("#price").text().replace("mmk","") * 1 ;
-           $qty = $parentNode.find("#qty").val();
-           $parentNode.find('#totalprice').html($price * ($qty*1) + " mmk");
-           summary();
-           })
-
-           $('.btn-minus').click(function() {
-            $parentNode = $(this).parents("tr");
-            $price = $parentNode.find("#price").text().replace("mmk","") * 1 ;
-           $qty = $parentNode.find("#qty").val();
-           $parentNode.find('#totalprice').html($price * ($qty*1) + " mmk");
-            summary();
+            })
         })
-
-        function summary() {
-             $pricetotal = 0;
-           $('#datatable tr').each(function(index,row) {
-               $pricetotal += Number($(row).find('#totalprice').text().replace("mmk",""));
-           })
-
-          $('#subtotal').html($pricetotal + " mmk");
-          $('#finalprice').html($pricetotal + 3000 * 1 +  " mmk")
-        }
-
-    })
     </script>
 @endsection
-
