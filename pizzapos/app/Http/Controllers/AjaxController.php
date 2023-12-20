@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Cart;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Orderlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AjaxController extends Controller
 {
@@ -41,19 +43,32 @@ class AjaxController extends Controller
 
     public function order(Request $req) {
         // logger($req->all());
+        $total = 0;
        foreach($req->all() as $item) {
-        Orderlist::create([
+       $data =    Orderlist::create([
         'user_id' => $item['userid'],
         'product_id' => $item['productid'],
         'qty' => $item['qty'],
         'total' => $item['total'],
         'ordercode' => $item['ordercode']
         ]);
+        $total += $data->total;
        }
+
+       Cart::where('user_id',Auth::user()->id)->delete();
+
+       Order::create([
+        'user_id' => Auth::user()->id,
+         'ordercode' => $data->ordercode,
+         'total_price' => $total + 3000
+
+       ]);
+
        $response =   [
         'message' => 'Add to order complete',
         'status' => 'success'
     ];
+
     return response()->json($response,200);
     }
 

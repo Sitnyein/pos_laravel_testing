@@ -16,6 +16,7 @@
 
     <!-- Cart Start -->
     <div class="container-fluid">
+        @if(count($cartlist) != 0)
         <div class="row px-xl-5">
             <div class="col-lg-8 table-responsive mb-5">
                 <table class="table table-light table-borderless table-hover text-center mb-0" id="datatable">
@@ -59,7 +60,7 @@
                                 </td>
                                 <td class="align-middle" id="totalprice">{{ $c->piza_price * $c->qty }} mmk</td>
 
-                                <td class="align-middle"><button class="btn btn-sm btn-danger"><i
+                                <td class="align-middle"><button class="btn btn-sm btn-danger btnremove "><i
                                             class="fa fa-times"></i></button></td>
                             </tr>
                         @endforeach
@@ -67,6 +68,7 @@
                 </table>
 
             </div>
+
             <div class="col-lg-4">
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart
                         Summary</span></h5>
@@ -91,7 +93,12 @@
                     </div>
                 </div>
             </div>
+
         </div>
+        @else
+        <h3 class="text-danger text-center shadow-sm    py-3">There is no order  piza list <i class="fa-solid fa-pizza-slice"></i></h3>
+
+        @endif
     </div>
     <!-- Cart End -->
 @endsection
@@ -106,7 +113,7 @@
         $(document).ready(function() {
             $('#orderbtn').click(function() {
                $orderlist=[];
-               $random = Math.floor(Math.random() * 1000000001);
+                $random = Math.floor(Math.random() * 100000115);
                $('#datatable tbody tr').each(function(index,row) {
                 $orderlist.push({
                     'userid' : $(row).find('#userid').val(),
@@ -124,9 +131,9 @@
                         dataType: 'json',
                         success: function(response) {
                             console.log(response);
-                        //  if(response.status == 'success') {
-                        //     window.location.href = "http://localhost:8000/user/clientpage";
-                        //  }
+                         if(response.status == 'success') {
+                            window.location.href = "http://localhost:8000/user/clientpage";
+                         }
                         }
                     })
 
@@ -135,4 +142,6 @@
             })
         })
     </script>
+
+
 @endsection

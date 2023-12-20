@@ -20,9 +20,16 @@ $(document).ready(function() {
     summary();
 })
 
+//btn remove
+$('.btnremove').click(function() {
+    $parentNode = $(this).parents("tr");
+    $parentNode.remove();
+    summary();
+})
+
 function summary() {
      $pricetotal = 0;
-   $('#datatable tr').each(function(index,row) {
+   $('#datatable tbody tr').each(function(index,row) {
        $pricetotal += Number($(row).find('#totalprice').text().replace("mmk",""));
    })
 
