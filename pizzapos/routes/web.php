@@ -120,12 +120,15 @@ Route::middleware([
 
         //this is ajax
         Route::get('ajax',[AjaxController::class,'javascriptcase'])->name('user#ajax');
-        //cartlist show 
+        //cartlist show
         Route::get('ajax/cart',[AjaxController::class,'addcart'])->name('add#cart');
         //order
         Route::get('ajax/order',[AjaxController::class,'order'])->name('ajax#order');
         //single cart remove
         Route::get('ajax/singlecart',[AjaxController::class,'singlecart'])->name('single#cart');
+        //cannel cartlist and all delete cartlist
+        Route::get('ajax/clearcart',[AjaxController::class,'clearcart'])->name('clear#cart');
+
 
 
     });

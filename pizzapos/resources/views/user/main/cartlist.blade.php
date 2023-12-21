@@ -91,6 +91,8 @@
                             </div>
                             <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" id="orderbtn">Proceed To
                                 Checkout</button>
+
+                                <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" id="clearbtn">Clear Cartlist</button>
                         </div>
                     </div>
                 </div>
@@ -166,6 +168,22 @@
 
                    $('#subtotal').html($pricetotal + " mmk");
                    $('#finalprice').html($pricetotal + 3000 * 1 +  " mmk")
+
+            })
+
+            //clear cart list
+            $('#clearbtn').click(function() {
+                $.ajax({
+                    type: 'get',
+                    url: 'http://localhost:8000/user/ajax/clearcart',
+                    dataType: 'json',
+                    success: function(response) {
+
+                        if (response.status == 'success') {
+                            window.location.href = "http://localhost:8000/user/clientpage";
+                        }
+                    }
+                })
 
             })
         })
