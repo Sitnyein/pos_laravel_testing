@@ -48,7 +48,20 @@
                                         </span>
                                       </button>
                                 </a>
+
+                                <a href="{{route('order#history')}}" class="ms-4">
+                                    <button type="button" class="btn btn-primary position-relative">
+                                        <i class="fa-solid fa-file-waveform"></i> History
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                          {{count($cart)}}
+                                          <span class="visually-hidden">unread messages</span>
+                                        </span>
+                                      </button>
+                                </a>
                             </div>
+
+
+
                             <div class="ml-2">
                                 <div class="btn-group">
                                     <select name="sortingname" id="sorting" class="form-control">

@@ -68,11 +68,20 @@ class AjaxController extends Controller
         'message' => 'Add to order complete',
         'status' => 'success'
     ];
-
     return response()->json($response,200);
     }
 
+//public function  cart remove single
+public function singlecart(Request $req) {
+  $data =  Cart::where('user_id',Auth::user()->id)
+  ->where('id',$req->cartid)->delete();
+  $response =   [
+    'message' => 'Add to order complete',
+    'status' => 'success'
+];
+return response()->json($response,200);
 
+}
 
 
 

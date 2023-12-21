@@ -20,12 +20,6 @@ $(document).ready(function() {
     summary();
 })
 
-//btn remove
-$('.btnremove').click(function() {
-    $parentNode = $(this).parents("tr");
-    $parentNode.remove();
-    summary();
-})
 
 function summary() {
      $pricetotal = 0;

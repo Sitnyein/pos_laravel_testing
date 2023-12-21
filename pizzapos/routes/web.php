@@ -115,13 +115,18 @@ Route::middleware([
         Route::get('pizza/detail/{id}',[UserController::class,'pizadetail'])->name('piza#detail');
         //this is user cartlist
         Route::get('cartlist',[UserController::class,'cartlist'])->name('cart#list');
+        //orderhistroy
+        Route::get('order/history',[UserController::class,'orderhistory'])->name('order#history');
 
         //this is ajax
         Route::get('ajax',[AjaxController::class,'javascriptcase'])->name('user#ajax');
-        //cartlist
+        //cartlist show 
         Route::get('ajax/cart',[AjaxController::class,'addcart'])->name('add#cart');
         //order
         Route::get('ajax/order',[AjaxController::class,'order'])->name('ajax#order');
+        //single cart remove
+        Route::get('ajax/singlecart',[AjaxController::class,'singlecart'])->name('single#cart');
+
 
     });
 

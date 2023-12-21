@@ -6,6 +6,7 @@ use validation;
 use Carbon\Carbon;
 use App\Models\Cart;
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -99,6 +100,12 @@ class UserController extends Controller
     ->where('carts.user_id',Auth::user()->id)->get();
     // dd($cartlist->toArray());
     return view('user.main.cartlist',compact('cartlist'));
+   }
+
+   //orderhistory
+   public function orderhistory() {
+    $order = Order::where('user_id',Auth::user()->id)->get();
+       return view('user.main.history',compact('order'));
    }
 
    private function getUserdata($request)
