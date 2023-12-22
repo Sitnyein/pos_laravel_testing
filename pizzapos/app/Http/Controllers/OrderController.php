@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -29,4 +30,19 @@ class OrderController extends Controller
         }
         return response()->json($order, 200);
     }
+     //admin want to change order status
+     public function changestatus(Request $req) {
+
+        logger($req->all());
+
+        // $status = [
+        //     'status' =>$req->status
+        // ];
+        // $order = Order::where('id',$req->orderid)->update($status);
+        //        $response =   [
+        //         'message' => 'Add to order complete',
+        //         'status' => 'success'
+        //     ];
+        //     return response()->json($response,200);
+     }
 }

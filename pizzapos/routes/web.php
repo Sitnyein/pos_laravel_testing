@@ -77,8 +77,10 @@ Route::middleware([
             Route::get('wantuser/list',[AdminController::class,'userlist'])->name('adminwant#userlist');
             //want to see customer order list
             Route::get('orderlist',[OrderController::class,'adminOrderlist'])->name('admin#orderlist');
-            // admin want to see collection of pending,success,reject
+            // admin want to see order collection of pending,success,reject
             Route::get('collection/orderlist',[OrderController::class,'collectorder'])->name('collect#order');
+            //admin want to change order status
+            Route::get('change/orderstatus',[OrderController::class,'changestatus'])->name('change#orderstatus');
         });
         /* for products*/
         Route::prefix('product')->group(function () {

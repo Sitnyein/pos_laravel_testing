@@ -57,16 +57,18 @@
                             <tbody id="ordertable">
                                 @foreach ($order as $o)
                                     <tr>
+
                                         <input type="hidden" id="userid" value="{{ Auth::user()->id }}">
                                         <td class="align-middle">{{ $o->userid }}</td>
-                                        <td class="align-middle">{{ $o->username }}</td>
+                                        <td class="align-middle">{{ $o->username }} || {{$o->id}}</td>
+
+                                        <input type="hidden" value="{{$o->id}}" class="orderid" name="orderid">
 
                                         <td class="align-middle">{{ $o->created_at->format('F-j-y') }}</td>
                                         <td class="align-middle">{{ $o->ordercode }}</td>
                                         <td class="align-middle">{{ $o->total_price }}</td>
                                         <td class="align-middle">
-
-                                            <select name="status" id="status" class="form-control">
+                                            <select name="status"  class="form-control statuschange">
                                                 <option value="0" @if ($o->status == 0) selected @endif>
                                                     Pending....</option>
                                                 <option value="1" @if ($o->status == 1) selected @endif>
@@ -98,37 +100,64 @@
         $(document).ready(function() {
             $('#orderstatus').change(function() {
                 $orderstatus = $('#orderstatus').val();
-               console.log($orderstatus)
+            //    console.log($orderstatus)
                $.ajax({
                     type: 'get',
                     url: 'http://localhost:8000/admin/collection/orderlist',
                     data: {'status' : $orderstatus},
                     dataType: 'json',
                     success: function(response) {
-// console.log(`${response[$i].total_price}`);
+
                         $list = '';
 
                            for ( $i =0 ; $i < response.length ; $i++ ) {
-                            $list += `
-<tr>
+            $month= ['January','February','March','April','May','JUNE','JULY','August','Setember','October','November','December'];
+            $dbdate = new Date(response[$i].created_at);
+            $date = $month[$dbdate.getMonth()]+"-"+$dbdate.getDate()+"-"+$dbdate.getFullYear();
 
-            <td class="align-middle">${response[$i].userid}</td>
-            <td class="align-middle">${response[$i].username}</td>
-
-            <td class="align-middle">${response[$i].created_at}</td>
-            <td class="align-middle">${response[$i].ordercode}</td>
-            <td class="align-middle">${response[$i].total_price}</td>
-            <td class="align-middle">
-
-                <select name="status" id="status" class="form-control">
-                    <option value="0">
+            //select
+            if(response[$i].status == 0) {
+                $statusmessage = `
+                <select name="status"  class="form-control " id="statuschange">
+                    <option value="0" selected>
                         Pending....</option>
                     <option value="1" >
                         Success....</option>
                     <option value="2" >
                         Reject....</option>
-                </select>
-            </td>
+                </select>`
+            }else if (response[$i].status == 1) {
+              $statusmessage = `
+              <select name="status"  class="form-control" id="statuschange">
+                    <option value="0" >
+                        Pending....</option>
+                    <option value="1" selected>
+                        Success....</option>
+                    <option value="2" >
+                        Reject....</option>
+                </select>`
+            }else if ( response[$i].status == 2 ) {
+                $statusmessage = `
+                <select name="status"  class="form-control" id="statuschange">
+                    <option value="0" >
+                        Pending....</option>
+                    <option value="1" >
+                        Success....</option>
+                    <option value="2" selected>
+                        Reject....</option>
+                </select>`
+            }
+                            $list += `
+<tr>
+          <input type="hidden" value="${response[$i].id}" class="orderid" name="orderid">
+
+            <td class="align-middle">${response[$i].userid}</td>
+            <td class="align-middle">${response[$i].username}</td>
+
+            <td class="align-middle">${$date}</td>
+            <td class="align-middle">${response[$i].ordercode}</td>
+            <td class="align-middle">${response[$i].total_price}</td>
+            <td class="align-middle"> ${$statusmessage} </td>
 
 
 
@@ -141,7 +170,38 @@
 
                     }
                 })
+
+
+            })//end of change status
+
+
+            $('.statuschange').change(function() {
+                 $status = $(this).val();
+                 $orderid = $parentNode.find('.orderid').val();
+                // console.log($status);
+                // console.log($orderid);
+
+                $status = $(this).val();
+                $parentNode = $(this).parents("tr");
+                $orderid = $parentNode.find('.orderid').val();
+                $data = {
+                    'status':$status,
+                    'orderid':$orderid,
+                }
+                $.ajax({
+                    type: 'get',
+                    url: 'http://localhost:8000/admin/change/orderstatus',
+                    data: $data,
+                    dataType: 'json',
+                    success: function(response) {
+                       console.log(response)
+                    }
+                })
+
             })
+
+
+
 
 
         })//end
