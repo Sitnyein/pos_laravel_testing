@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\User\UserController;
@@ -74,6 +75,10 @@ Route::middleware([
             Route::get('changerole/{id}',[AdminController::class,'changerole'])->name('change#role');
             //admin want to see userlist
             Route::get('wantuser/list',[AdminController::class,'userlist'])->name('adminwant#userlist');
+            //want to see customer order list
+            Route::get('orderlist',[OrderController::class,'adminOrderlist'])->name('admin#orderlist');
+            // admin want to see collection of pending,success,reject
+            Route::get('collection/orderlist',[OrderController::class,'collectorder'])->name('collect#order');
         });
         /* for products*/
         Route::prefix('product')->group(function () {

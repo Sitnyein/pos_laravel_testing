@@ -34,6 +34,9 @@
 
     <!-- Main CSS-->
     <link href="{{ asset('admin/css/theme.css') }}" rel="stylesheet" media="all">
+    {{-- heroicons  --}}
+    <link href="https://cdn.jsdelivr.net/npm/heroicons@1.0.4/dist/solid.css" rel="stylesheet">
+
 
 </head>
 

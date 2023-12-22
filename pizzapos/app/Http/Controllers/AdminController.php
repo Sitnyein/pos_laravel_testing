@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -111,9 +112,9 @@ class AdminController extends Controller
     public function changerole($id)
     {
         $user = User::where('id', $id)->first();
-        if($user->role == "admin" ) {
+        if ($user->role == "admin") {
             User::where('id', $id)->update(['role' => 'user']);
-        return redirect()->route('admin#list')->with(['deleteSuccess' => 'You have  change role   account ....']);
+            return redirect()->route('admin#list')->with(['deleteSuccess' => 'You have  change role   account ....']);
 
         } else {
             User::where('id', $id)->update(['role' => 'admin']);
@@ -132,6 +133,8 @@ class AdminController extends Controller
         $user->appends(request()->all());
         return view('admin.accouts.userlist', compact('user'));
     }
+
+    
 
     //get user data for adedit
     private function getUserdata($request)
@@ -155,7 +158,7 @@ class AdminController extends Controller
             'phone' => 'required',
             'address' => 'required',
             'gender' => 'required',
-            'image' => 'mimes:jpg,bmp.png|file'
+            'image' => 'mimes:jpg,bmp.png|file',
         ])->validate();
 
     }

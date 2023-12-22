@@ -42,6 +42,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+        {{-- heroicons  --}}
+        <link href="https://cdn.jsdelivr.net/npm/heroicons@1.0.4/dist/solid.css" rel="stylesheet">
+
 </head>
 
 
@@ -74,6 +77,11 @@
                         <li>
                             <a href="{{route('adminwant#userlist')}}">
                                 <i class="fa-solid fa-id-badge"></i>UserList</a>
+                        </li>
+                        <li>
+                            <a href="{{route('admin#orderlist')}}" class=" d-flex">
+                                <i class="fa-regular fa-paste mt-1"></i>Orderlist
+                                 </a>
                         </li>
                     </ul>
                 </nav>
@@ -261,6 +269,7 @@
     <script src="{{ asset('admin/js/main.js') }}"></script>
 
 </body>
+@yield('scriptSource')
 
 </html>
 <!-- end document-->
