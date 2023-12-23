@@ -98,96 +98,93 @@
 @section('scriptSource')
     <script>
         $(document).ready(function() {
-            $('#orderstatus').change(function() {
-                $orderstatus = $('#orderstatus').val();
-            //    console.log($orderstatus)
-               $.ajax({
-                    type: 'get',
-                    url: 'http://localhost:8000/admin/collection/orderlist',
-                    data: {'status' : $orderstatus},
-                    dataType: 'json',
-                    success: function(response) {
+//             $('#orderstatus').change(function() {
+//                 $orderstatus = $('#orderstatus').val();
+//             //    console.log($orderstatus)
+//                $.ajax({
+//                     type: 'get',
+//                     url: 'http://localhost:8000/admin/collection/orderlist',
+//                     data: {'status' : $orderstatus},
+//                     dataType: 'json',
+//                     success: function(response) {
 
-                        $list = '';
+//                         $list = '';
 
-                           for ( $i =0 ; $i < response.length ; $i++ ) {
-            $month= ['January','February','March','April','May','JUNE','JULY','August','Setember','October','November','December'];
-            $dbdate = new Date(response[$i].created_at);
-            $date = $month[$dbdate.getMonth()]+"-"+$dbdate.getDate()+"-"+$dbdate.getFullYear();
+//                            for ( $i =0 ; $i < response.length ; $i++ ) {
+//             $month= ['January','February','March','April','May','JUNE','JULY','August','Setember','October','November','December'];
+//             $dbdate = new Date(response[$i].created_at);
+//             $date = $month[$dbdate.getMonth()]+"-"+$dbdate.getDate()+"-"+$dbdate.getFullYear();
 
-            //select
-            if(response[$i].status == 0) {
-                $statusmessage = `
-                <select name="status"  class="form-control " id="statuschange">
-                    <option value="0" selected>
-                        Pending....</option>
-                    <option value="1" >
-                        Success....</option>
-                    <option value="2" >
-                        Reject....</option>
-                </select>`
-            }else if (response[$i].status == 1) {
-              $statusmessage = `
-              <select name="status"  class="form-control" id="statuschange">
-                    <option value="0" >
-                        Pending....</option>
-                    <option value="1" selected>
-                        Success....</option>
-                    <option value="2" >
-                        Reject....</option>
-                </select>`
-            }else if ( response[$i].status == 2 ) {
-                $statusmessage = `
-                <select name="status"  class="form-control" id="statuschange">
-                    <option value="0" >
-                        Pending....</option>
-                    <option value="1" >
-                        Success....</option>
-                    <option value="2" selected>
-                        Reject....</option>
-                </select>`
-            }
-                            $list += `
-<tr>
-          <input type="hidden" value="${response[$i].id}" class="orderid" name="orderid">
+//             //select
+//             if(response[$i].status == 0) {
+//                 $statusmessage = `
+//                 <select name="status"  class="form-control " id="statuschange">
+//                     <option value="0" selected>
+//                         Pending....</option>
+//                     <option value="1" >
+//                         Success....</option>
+//                     <option value="2" >
+//                         Reject....</option>
+//                 </select>`
+//             }else if (response[$i].status == 1) {
+//               $statusmessage = `
+//               <select name="status"  class="form-control" id="statuschange">
+//                     <option value="0" >
+//                         Pending....</option>
+//                     <option value="1" selected>
+//                         Success....</option>
+//                     <option value="2" >
+//                         Reject....</option>
+//                 </select>`
+//             }else if ( response[$i].status == 2 ) {
+//                 $statusmessage = `
+//                 <select name="status"  class="form-control" id="statuschange">
+//                     <option value="0" >
+//                         Pending....</option>
+//                     <option value="1" >
+//                         Success....</option>
+//                     <option value="2" selected>
+//                         Reject....</option>
+//                 </select>`
+//             }
+//                             $list += `
+// <tr>
+//           <input type="hidden" value="${response[$i].id}" class="orderid" name="orderid">
 
-            <td class="align-middle">${response[$i].userid}</td>
-            <td class="align-middle">${response[$i].username}</td>
+//             <td class="align-middle">${response[$i].userid}</td>
+//             <td class="align-middle">${response[$i].username}</td>
 
-            <td class="align-middle">${$date}</td>
-            <td class="align-middle">${response[$i].ordercode}</td>
-            <td class="align-middle">${response[$i].total_price}</td>
-            <td class="align-middle"> ${$statusmessage} </td>
-
-
-
-        </tr>
-`;
+//             <td class="align-middle">${$date}</td>
+//             <td class="align-middle">${response[$i].ordercode}</td>
+//             <td class="align-middle">${response[$i].total_price}</td>
+//             <td class="align-middle"> ${$statusmessage} </td>
 
 
-                           }
-                           $('#ordertable').html($list);
 
-                    }
-                })
+//         </tr>
+// `;
 
 
-            })//end of change status
+//                            }
+//                            $('#ordertable').html($list);
+
+//                     }
+//                 })
+
+
+//             })       //end of change status
 
 
             $('.statuschange').change(function() {
                  $status = $(this).val();
-                 $orderid = $parentNode.find('.orderid').val();
-                // console.log($status);
-                // console.log($orderid);
-
-                $status = $(this).val();
                 $parentNode = $(this).parents("tr");
-                $orderid = $parentNode.find('.orderid').val();
+                 $orderid = $parentNode.find('.orderid').val();
+
                 $data = {
                     'status':$status,
                     'orderid':$orderid,
                 }
+
                 $.ajax({
                     type: 'get',
                     url: 'http://localhost:8000/admin/change/orderstatus',

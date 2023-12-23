@@ -34,17 +34,17 @@ class OrderController extends Controller
     public function changestatus(Request $req)
     {
 
-        logger($req->all());
 
-        // $status = [
-        //     'status' =>$req->status
-        // ];
-        // $order = Order::where('id',$req->orderid)->update($status);
-        //        $response =   [
-        //         'message' => 'Add to order complete',
-        //         'status' => 'success'
-        //     ];
-        //     return response()->json($response,200);
+
+        $status = [
+            'status' =>$req->status
+        ];
+        $order = Order::where('id',$req->orderid)->update($status);
+               $response =   [
+                'message' => 'Add to order complete',
+                'status' => 'success'
+            ];
+            return response()->json($response,200);
     }
 
     public function ordercode($ordercode)
@@ -58,7 +58,7 @@ class OrderController extends Controller
         $orderprice = Order::Select('orders.*', 'users.name as username')
                      ->leftJoin('users', 'users.id', 'orders.user_id')
                       ->where('ordercode',$ordercode)->first();
-                      
+
 
              return view('admin.order.ordercode',compact('order','orderprice'));
     }
