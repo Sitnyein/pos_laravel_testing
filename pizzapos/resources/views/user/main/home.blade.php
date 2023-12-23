@@ -86,7 +86,7 @@
                                 <div class="product-action">
                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                    <a class="btn btn-outline-dark btn-square" href="{{route('piza#detail',$p->id)}}"><i class="fa-solid fa-circle-info"></i>                                   </a>
-                                   <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+
 
                                </div>
                            </div>
@@ -200,6 +200,6 @@
                     })
                 }
             })
-        })
+        })//end 
     </script>
 @endsection

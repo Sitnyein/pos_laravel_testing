@@ -92,6 +92,17 @@ public function clearcart(Request $req) {
    //need to testing
   }
 
+  //increase view count
+  public function viewcount(Request $req) {
+    $product = Product::where('id',$req->productid)->first();
+
+    $viewcount = [
+        'view_count' => $product->view_count +1
+    ];
+    Product::where('id',$req->productid)->update($viewcount);
+
+  }
+
 
 
 

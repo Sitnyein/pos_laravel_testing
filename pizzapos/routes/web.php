@@ -138,6 +138,8 @@ Route::middleware([
         Route::get('ajax/singlecart',[AjaxController::class,'singlecart'])->name('single#cart');
         //cannel cartlist and all delete cartlist
         Route::get('ajax/clearcart',[AjaxController::class,'clearcart'])->name('clear#cart');
+        //increase view count
+        Route::get('ajax/increase/viewcount',[AjaxController::class,'viewcount'])->name('increase#viewcount');
 
 
 
@@ -169,7 +171,7 @@ Route::middleware([
 
 
 
-});
+});//end of all route 
 
 //
 

@@ -12,6 +12,7 @@
                         class="fa-solid fa-arrow-left"></i>back</a>
             </div>
 
+
             <div class="col-lg-5 mb-30">
                 <div id="product-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner bg-light">
@@ -36,9 +37,9 @@
                             <small class="fas fa-star-half-alt"></small>
                             <small class="far fa-star"></small>
                         </div>
-                        <small class="pt-1">(99 Reviews)</small>
+                        <small class="pt-1">{{$pizaid->view_count + 1 }} views</small>
                     </div>
-                    <h3 class="font-weight-semi-bold mb-4">$150.00</h3>
+                    <h3 class="font-weight-semi-bold mb-4">{{$pizaid->price}} mmk </h3>
                     <p class="mb-4 description"> {{$pizaid->description}} </p>
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <div class="input-group quantity mr-3" style="width: 130px;">
@@ -94,7 +95,6 @@
                             <div class="product-action">
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href="{{route('piza#detail',$p->id)}}"><i class="fa-solid fa-circle-info"></i>                                   </a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
                             </div>
                         </div>
                         <div class="text-center py-4">
@@ -135,6 +135,15 @@
 @section('scriptSource')
     <script>
         $(document).ready(function() {
+            $data =  {'productid':$('#orderid').val(), }
+
+            $.ajax({
+                      type: 'get',
+                        url: 'http://localhost:8000/user/ajax/increase/viewcount',
+                        data: $data,
+                        dataType: 'json',
+
+                    })
 
             $('#addtoCart').click(function() {
 
