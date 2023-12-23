@@ -14,22 +14,16 @@
                         </div>
                     </div>
 
-                    @if (session('deleteSuccess'))
-                        <!--alert message create-->
-                        <div class='col-4 offset-8'>
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                <i class="fa-solid fa-check"></i> {{ session('deleteSuccess') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                        </div>
-                    @endif
+
+
+
+                    <form action="{{route('collect#order')}}">
 
                     <div class="d-flex">
                         <label for="" class="mt-2 me-2">Orderstatus</label>
 
                         <select name="status" id="orderstatus" class="form-control col-2">
-                            <option value="">All</option>
+                            <option value="" >All</option>
                             <option value="0">
                                 Pending....</option>
                             <option value="1">
@@ -37,7 +31,10 @@
                             <option value="2" >
                                 Reject....</option>
                         </select>
+
+                        <button class=" ms-2 btn btn-sm  btn-dark text-white"> <i class="fa-brands fa-searchengin"></i> <span class="text-primary">Search</span></button>
                     </div>
+                    </form>
 
 
                     {{-- @if (count($user) != 0) --}}
@@ -60,7 +57,7 @@
 
                                         <input type="hidden" id="userid" value="{{ Auth::user()->id }}">
                                         <td class="align-middle">{{ $o->userid }}</td>
-                                        <td class="align-middle">{{ $o->username }} || {{$o->id}}</td>
+                                        <td class="align-middle">{{ $o->username }} </td>
 
                                         <input type="hidden" value="{{$o->id}}" class="orderid" name="orderid">
 

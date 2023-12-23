@@ -53,7 +53,7 @@
                                     <button type="button" class="btn btn-primary position-relative">
                                         <i class="fa-solid fa-file-waveform"></i> History
                                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                          {{count($cart)}}
+                                          {{count($order)}}
                                           <span class="visually-hidden">unread messages</span>
                                         </span>
                                       </button>
@@ -76,15 +76,27 @@
 
                     {{-- control ajax javascript  --}}
                    <span class="row" id="homejs">
+                    @if (session('createSuccess'))
+                    <!--alert message create-->
+                    <div class='col-4 offset-8 my-2'>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fa-solid fa-check"></i> {{ session('createSuccess') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                    </div>
+                @endif
                    @if(count($product) != 0)
+
                    @foreach ($product as $p)
+
                    <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                        <div class="product-item bg-light mb-4">
                            <div class="product-img position-relative overflow-hidden">
                                <img class="img-fluid w-100 h-50"
                                    src="{{ asset('storage/' . $p->image) }}" alt="">
                                 <div class="product-action">
-                                   <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                   <a class="btn btn-outline-dark btn-square" href="{{route('order#cart',$p->id)}}"><i class="fa fa-shopping-cart"></i></a>
                                    <a class="btn btn-outline-dark btn-square" href="{{route('piza#detail',$p->id)}}"><i class="fa-solid fa-circle-info"></i>                                   </a>
 
 
@@ -200,6 +212,6 @@
                     })
                 }
             })
-        })//end 
+        })//end
     </script>
 @endsection

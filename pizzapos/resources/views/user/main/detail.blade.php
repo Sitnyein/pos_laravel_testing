@@ -7,10 +7,22 @@
     <div class="container-fluid pb-5">
         <div class="row px-xl-5">
             {{-- back button  --}}
-            <div class="my-2">
+            <div class="my-4">
                 <a href="{{ route('client#page') }}" class="text-decoration-none text-black"> <i
                         class="fa-solid fa-arrow-left"></i>back</a>
             </div>
+
+      
+            @if (session('createSuccess'))
+            <!--alert message create-->
+            <div class='col-4 offset-8'>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fa-solid fa-check"></i> {{ session('createSuccess') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                        aria-label="Close"></button>
+                </div>
+            </div>
+        @endif
 
 
             <div class="col-lg-5 mb-30">
@@ -93,12 +105,13 @@
                         <div class="product-img position-relative overflow-hidden">
                             <img class="img-fluid w-100" src="{{ asset('storage/' . $p->image) }}" alt="">
                             <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                <a class="btn btn-outline-dark btn-square"  href="{{route('order#cart',$p->id)}}"><i class="fa fa-shopping-cart"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href="{{route('piza#detail',$p->id)}}"><i class="fa-solid fa-circle-info"></i>                                   </a>
                             </div>
                         </div>
                         <div class="text-center py-4">
                             <a class="h6 text-decoration-none text-truncate" href="">{{$p->name}}</a>
+
                             <div class="d-flex align-items-center justify-content-center mt-2">
                                 <h5>{{$p->price}} mmk</h5><h6 class="text-muted ml-2"><del>10000 mmk</del></h6>
                             </div>
@@ -169,6 +182,7 @@
                     })
 
             })
+
         })
     </script>
 @endsection

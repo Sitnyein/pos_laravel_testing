@@ -13,14 +13,11 @@
                             </div>
                         </div>
                         <div class="table-data__tool-right">
-                            <a href="{{ route('category#createpage') }}">
+                            <a href="{{ route('category#createpage') }}" class="me-5">
                                 <button class="au-btn au-btn-icon au-btn--green au-btn--small">
                                     <i class="zmdi zmdi-plus"></i>add item
                                 </button>
-                            </a>
-                            <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                CSV download
-                            </button>
+                         
                         </div>
                     </div>
                     @if (session('createSuccess'))

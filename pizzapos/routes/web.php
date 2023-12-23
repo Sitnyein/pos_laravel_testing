@@ -130,8 +130,10 @@ Route::middleware([
 
         //this is ajax
         Route::get('ajax',[AjaxController::class,'javascriptcase'])->name('user#ajax');
-        //cartlist show
+        //cartlist show //add to cart with ajax
         Route::get('ajax/cart',[AjaxController::class,'addcart'])->name('add#cart');
+        //add to cart with laravel
+        Route::get('cart/{id}',[OrderController::class,'ordercart'])->name('order#cart');
         //order
         Route::get('ajax/order',[AjaxController::class,'order'])->name('ajax#order');
         //single cart remove
@@ -171,7 +173,7 @@ Route::middleware([
 
 
 
-});//end of all route 
+});//end of all route
 
 //
 

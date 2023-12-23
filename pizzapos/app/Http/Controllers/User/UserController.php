@@ -23,14 +23,16 @@ class UserController extends Controller
         $product = Product::orderBy('products.id', 'desc')->paginate(5);
         $cart = Cart::where('user_id',Auth::user()->id)->get();
         $category = Category::get();
-        return view('user.main.home',compact('product','category','cart'));
+        $order = Order::where('user_id',Auth::user()->id)->get();
+        return view('user.main.home',compact('product','category','cart','order'));
     }
     //filter by category
     public function filter($id) {
         $product = Product::where('category_id',$id)->orderBy('products.id', 'desc')->paginate(5);
         $category = Category::get();
         $cart = Cart::where('user_id',Auth::user()->id)->get();
-        return view('user.main.home',compact('product','category','cart'));
+        $order = Order::where('user_id',Auth::user()->id)->get();
+        return view('user.main.home',compact('product','category','cart','order'));
     }
 
     //pw page
@@ -89,8 +91,9 @@ class UserController extends Controller
    public function pizadetail($pizaid) {
     $pizaid = Product::where('id',$pizaid)->first();
     $products = Product::get();
+
     // dd($pizaid->toArray());
-    return view('user.main.detail',compact('pizaid','products'));
+    return view('user.main.detail',compact('pizaid','products',));
    }
 
    // user cartlist
