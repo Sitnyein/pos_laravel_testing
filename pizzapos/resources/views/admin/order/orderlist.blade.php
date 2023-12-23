@@ -65,7 +65,7 @@
                                         <input type="hidden" value="{{$o->id}}" class="orderid" name="orderid">
 
                                         <td class="align-middle">{{ $o->created_at->format('F-j-y') }}</td>
-                                        <td class="align-middle">{{ $o->ordercode }}</td>
+                                        <td class="align-middle"> <a href="{{route('item#ordercode',$o->ordercode )}}" class="text-primary">{{ $o->ordercode }}</a> </td>
                                         <td class="align-middle">{{ $o->total_price }}</td>
                                         <td class="align-middle">
                                             <select name="status"  class="form-control statuschange">

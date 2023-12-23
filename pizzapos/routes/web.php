@@ -81,6 +81,9 @@ Route::middleware([
             Route::get('collection/orderlist',[OrderController::class,'collectorder'])->name('collect#order');
             //admin want to change order status
             Route::get('change/orderstatus',[OrderController::class,'changestatus'])->name('change#orderstatus');
+            //What is ordercode and item include in ordercode
+            Route::get('ordercode/{ordercode}',[OrderController::class,'ordercode'])->name('item#ordercode');
+
         });
         /* for products*/
         Route::prefix('product')->group(function () {

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Orderlist;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -30,8 +30,9 @@ class OrderController extends Controller
         }
         return response()->json($order, 200);
     }
-     //admin want to change order status
-     public function changestatus(Request $req) {
+    //admin want to change order status
+    public function changestatus(Request $req)
+    {
 
         logger($req->all());
 
@@ -44,5 +45,22 @@ class OrderController extends Controller
         //         'status' => 'success'
         //     ];
         //     return response()->json($response,200);
-     }
+    }
+
+    public function ordercode($ordercode)
+    {
+
+        $order = Orderlist::Select('orderlists.*','products.name as productname','products.image as product_image')
+
+            ->leftJoin('products','products.id','orderlists.product_id')
+            ->where('ordercode', $ordercode)->get();
+
+        $orderprice = Order::Select('orders.*', 'users.name as username')
+                     ->leftJoin('users', 'users.id', 'orders.user_id')
+                      ->where('ordercode',$ordercode)->first();
+                      
+
+             return view('admin.order.ordercode',compact('order','orderprice'));
+    }
+
 }
