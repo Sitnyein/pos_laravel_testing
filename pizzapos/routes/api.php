@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\RouteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +17,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+
+Route::get('user/order',[RouteController::class,'apiuser']);
+Route::get('category/product',[RouteController::class,'apiproduct']);
+Route::get('user/product',[RouteController::class,'userproduct']);
+
+Route::get('apitesting',function() {
+    $data = [
+        'message' => 'this is api testing'
+    ];
+     return response()->json($data, 200);
 });

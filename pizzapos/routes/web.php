@@ -193,3 +193,14 @@ Route::view('URI', 'viewName');
 Route::get('testing',function() {
     return view('user.main.detail');
 });
+
+
+
+
+Route::get('testing',function() {
+
+    $data = [
+        'message' => 'this is web testing'
+    ];
+     return response()->json($data, 200);
+});
